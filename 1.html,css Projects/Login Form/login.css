@@ -1,0 +1,118 @@
+body{
+    background-image: url("matthieu-rochette-6qVFi8PVygE-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+div.hi{
+    border: 1.7px solid white;
+    width: 155px;
+    height: 70px;
+    color: rgb(0, 255, 251);
+    border-radius: 8px;
+    position: absolute;
+    right: 45%;
+    top: 35%;
+    padding: 10px;
+    padding-top: 0%;
+    box-shadow: 0 0 10px black,0 0 20px black;
+}
+h1{
+    text-shadow: 0 0 7px black,0 0 14px black;
+}
+@media (max-width : 320px){
+    body{
+        background-image: url("matthieu-rochette-6qVFi8PVygE-unsplash.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    div.hi{
+        border: 1.7px solid white;
+        width: 155px;
+        height: 70px;
+        color: rgb(0, 255, 251);
+        border-radius: 8px;
+        position: absolute;
+        right: 22%;
+        top: 35%;
+        padding: 10px;
+        padding-top: 0%;
+        box-shadow: 0 0 10px black,0 0 20px black;
+    }
+    h1{
+        text-shadow: 0 0 7px black,0 0 14px black;
+    }
+}
+@media (min-width : 321px) and (max-width : 376px){
+    body{
+        background-image: url("matthieu-rochette-6qVFi8PVygE-unsplash.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    div.hi{
+        border: 1.7px solid white;
+        width: 155px;
+        height: 70px;
+        color: rgb(0, 255, 251);
+        border-radius: 8px;
+        position: absolute;
+        right: 27%;
+        top: 35%;
+        padding: 10px;
+        padding-top: 0%;
+        box-shadow: 0 0 10px black,0 0 20px black;
+    }
+    h1{
+        text-shadow: 0 0 7px black,0 0 14px black;
+    }
+}
+@media (min-width : 376px) and (max-width : 426px){
+    body{
+        background-image: url("matthieu-rochette-6qVFi8PVygE-unsplash.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    div.hi{
+        border: 1.7px solid white;
+        width: 155px;
+        height: 70px;
+        color: rgb(0, 255, 251);
+        border-radius: 8px;
+        position: absolute;
+        right: 30%;
+        top: 35%;
+        padding: 10px;
+        padding-top: 0%;
+        box-shadow: 0 0 10px black,0 0 20px black;
+    }
+    h1{
+        text-shadow: 0 0 7px black,0 0 14px black;
+    }
+}
+@media (min-width : 426px) and (max-width : 769px){
+    body{
+        background-image: url("matthieu-rochette-6qVFi8PVygE-unsplash.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    div.hi{
+        border: 1.7px solid white;
+        width: 155px;
+        height: 70px;
+        color: rgb(0, 255, 251);
+        border-radius: 8px;
+        position: absolute;
+        right: 40%;
+        top: 35%;
+        padding: 10px;
+        padding-top: 0%;
+        box-shadow: 0 0 10px black,0 0 20px black;
+    }
+    h1{
+        text-shadow: 0 0 7px black,0 0 14px black;
+    }
+}
