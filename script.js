@@ -289,7 +289,7 @@ window.addEventListener('click', function(e) {
     let scrollAmount = 0;
     let reqId;
     function animate() {
-        scrollAmount += 1.1; // Adjust speed here
+        scrollAmount += 0.5; // Adjust speed here - decreased from 1.1
         if (scrollAmount >= track.scrollWidth / 2) {
             scrollAmount = 0;
         }
