@@ -7,19 +7,15 @@ AOS.init({
 
 // Mobile Menu Toggle
 function showSidebar() {
-    const menu = document.querySelector('.menu');
-    menu.classList.add('active');
-}
-
-function closeSidebar() {
-    const menu = document.querySelector('.menu');
-    menu.classList.remove('active');
+    const navbar = document.querySelector('.navbar');
+    navbar.classList.toggle('active');
 }
 
 // Close mobile menu when clicking a link
-document.querySelectorAll('.menu a').forEach(link => {
+document.querySelectorAll('.navbar a').forEach(link => {
     link.addEventListener('click', () => {
-        closeSidebar();
+        const navbar = document.querySelector('.navbar');
+        navbar.classList.remove('active');
     });
 });
 
