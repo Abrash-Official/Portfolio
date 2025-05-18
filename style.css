@@ -1003,14 +1003,14 @@ img{
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav {
-        padding: 1rem;
+        padding: 2.5rem 1rem 2rem;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
     }
 
     .nav h1 {
-        font-size: 1rem;
+        font-size: 1.4rem;
         flex-shrink: 0;
         margin-right: 0;
     }
