@@ -107,6 +107,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             {
                 from_name: data.name,
                 from_email: data.email,
+                subject: data.subject,
                 message: data.message
             },
             'WSnVwfTbGEPCqzo_0' // Your EmailJS Public Key
