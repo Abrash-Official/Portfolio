@@ -54,6 +54,12 @@ span{
     flex-shrink: 0;
 }
 
+@media (min-width: 769px) {
+    .nav h1 {
+        font-size: 1.8rem;  /* Decreased by 0.5 times from 2rem */
+    }
+}
+
 .navbar {
     display: flex;
     align-items: center;
@@ -1483,8 +1489,4 @@ img{
     flex-basis: 100%;
     text-align: center;
     padding: 0 20px;
-}
-
-.nav h1 {
-    font-size: 1rem;
 }
