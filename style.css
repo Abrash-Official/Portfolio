@@ -964,15 +964,25 @@ img{
     }
 
     .data {
-        margin-top: 1rem; /* Adjusted margin top */
+        margin-top: 1.5rem;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .data h5 {
+        text-align: left;
+    }
+
+    .data .name h1 {
+        text-align: center; /* Ensure center alignment for smaller mobiles */
     }
 
     .data h5 span.siz {
-        font-size: 1.2rem; /* Further reduced font size */
+        font-size: 1.2rem;
     }
 
     .data .name h1.nam {
-        font-size: 2.2rem; /* Further reduced font size */
+        font-size: 1.8rem; /* Further decreased font size for smaller mobiles */
     }
 
     .hero-title-typing {
@@ -995,7 +1005,7 @@ img{
 
     .section-title {
          font-size: 2rem; /* Reduced section title size */
-         margin-bottom: 0.2rem; /* Further reduced margin below section title for smaller mobiles */
+         margin-bottom: 4.5rem; /* Further increased gap below section titles for smaller mobiles */
     }
 
     .about-text p {
@@ -1273,7 +1283,7 @@ img{
     }
 
     .data h5, .data .name h1 {
-        text-align: center;
+        text-align: left;
     }
 
     .data h5 span.siz {
@@ -1281,7 +1291,7 @@ img{
     }
 
     .data .name h1.nam {
-        font-size: 2.8rem;
+        font-size: 2.2rem; /* Further decreased font size for mobile */
     }
 
     .hero-title-typing {
@@ -1483,6 +1493,25 @@ img{
     .tech-stack-item span {
         font-size: 0.65rem;
     }
+
+    .section-title {
+        margin-bottom: 5rem; /* Increased gap below section titles to 5rem */
+    }
+
+    .projects {
+        padding: 3rem 0;
+        overflow: hidden;
+    }
+
+    .projects-carousel {
+        padding: 2rem 0;
+        margin-bottom: 1rem; /* Space before next section */
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1506,8 +1535,8 @@ img{
     }
 
     .projects-carousel {
-        padding: 0.0rem 0;
-        margin-bottom: 0.0rem; /* Further decreased margin bottom for smaller mobiles */
+        padding: 1rem 0; /* Restored padding */
+        margin-bottom: 1rem; /* Restored margin bottom */
     }
 
     .carousel-track {
@@ -1572,6 +1601,16 @@ img{
 
     .info-item {
         font-size: 0.85rem;
+    }
+
+    .section-title {
+         font-size: 2rem;
+         margin-bottom: 4.5rem; /* Increased gap below section titles to 4.5rem for smaller mobiles */
+    }
+
+    .projects-carousel {
+        padding: 1rem 0; /* Restored padding */
+        margin-bottom: 1rem; /* Restored margin bottom */
     }
 }
 
