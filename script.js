@@ -273,40 +273,14 @@ window.addEventListener('click', function(e) {
     const track = document.querySelector('.carousel-track');
     if (!carousel || !track) return;
 
-    // Only run carousel on screens wider than 768px
-    if (window.innerWidth <= 768) {
-        // Ensure no animation or cloning is applied on mobile
-        if (track.classList.contains('js-infinite')) {
-            track.classList.remove('js-infinite');
-            // Remove cloned elements if any were added previously
-            Array.from(track.children).forEach(child => {
-                if (child.classList.contains('clone')) {
-                    track.removeChild(child);
-                }
-            });
-        }
-        track.style.transform = 'translateX(0)'; // Reset any leftover transform
-        return; // Exit the function if on mobile
-    }
-    
-    // Only clone if not already cloned for desktop
-    if (!track.classList.contains('js-infinite')) {
-        track.classList.add('js-infinite');
-        // Clone all cards for seamless infinite scroll
-        const cards = Array.from(track.children);
-        cards.forEach(card => {
-            const clone = card.cloneNode(true);
-            clone.classList.add('clone');
-            track.appendChild(clone);
-        });
-    }
-
     let scrollAmount = 0;
     let reqId;
     let scrollSpeed = 0.5; // Speed for desktop
+    let isInitialized = false; // Flag to track initialization
 
     function animate() {
         scrollAmount += scrollSpeed;
+        // Reset when scrolled past the width of the original items (half of the track width after cloning)
         if (scrollAmount >= track.scrollWidth / 2) {
             scrollAmount = 0;
         }
@@ -314,43 +288,46 @@ window.addEventListener('click', function(e) {
         reqId = requestAnimationFrame(animate);
     }
 
-    // Start animation immediately on desktop
-    animate();
+    function initializeCarousel() {
+        if (isInitialized) return; // Prevent double initialization
 
-    // Handle window resize - re-initialize if crossing the 768px threshold
-    window.addEventListener('resize', () => {
-        // Simple reload or re-evaluate logic could be here,
-        // but for simplicity, we might just let the CSS handle the layout.
-        // Re-running the whole function on resize is also an option:
-        // (function() { ... your entire IIFE content ... })();
-        // For now, rely on CSS to hide animation and handle layout.
-        // The initial check when the page loads is the most critical.
-        if (window.innerWidth <= 768) {
-             if (track.classList.contains('js-infinite')) {
-                track.classList.remove('js-infinite');
-                Array.from(track.children).forEach(child => {
-                    if (child.classList.contains('clone')) {
-                        track.removeChild(child);
-                    }
-                });
-            }
-            track.style.transform = 'translateX(0)';
-            cancelAnimationFrame(reqId); // Stop animation loop
-        } else {
-             // Re-initialize if resizing from mobile to desktop
-             if (!track.classList.contains('js-infinite')) {
-                 // This would require cloning again, etc. A full re-init is cleaner.
-                 // For now, we just rely on the initial load setup.
-             }
-              // If animation was stopped, restart it (handle edge cases carefully)
-              // animate(); // Might need more sophisticated state management
+        // Clone cards for both mobile and desktop
+        if (!track.classList.contains('js-infinite')) {
+            track.classList.add('js-infinite');
+            // Clone all cards for seamless infinite scroll
+            const cards = Array.from(track.children);
+            cards.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.classList.add('clone');
+                track.appendChild(clone);
+            });
         }
 
-    });
+        // Start animation for both mobile and desktop
+        animate();
+        isInitialized = true;
 
-    // Pause on hover only for desktop devices
-    carousel.addEventListener('mouseenter', () => cancelAnimationFrame(reqId));
-    carousel.addEventListener('mouseleave', animate);
+        // Pause on hover
+        carousel.addEventListener('mouseenter', pauseAnimation);
+        carousel.addEventListener('mouseleave', resumeAnimation);
+    }
+
+    function pauseAnimation() {
+        cancelAnimationFrame(reqId);
+    }
+
+    function resumeAnimation() {
+        animate();
+    }
+
+    // Initialize on page load
+    initializeCarousel();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        // Re-initialize when crossing the 768px threshold
+        initializeCarousel();
+    });
 
 })();
 

@@ -1178,38 +1178,32 @@ img{
     }
 
     .projects-carousel {
-        padding: 0; /* Remove padding */
+        padding: 0;
         margin-bottom: 1rem;
         min-height: auto;
-        overflow: visible; /* Allow overflow to show all cards */
-        display: flex; /* Use flexbox for stacking */
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center cards horizontally */
+        overflow: hidden; /* Hide overflow to create scrolling effect */
+        display: block; /* Change from flex to block */
+        position: relative; /* Add position relative */
     }
 
     .carousel-track {
-        display: flex; /* Use flexbox for the track */
-        flex-direction: column; /* Stack items vertically */
-        gap: 1.5rem; /* Add gap between stacked cards */
-        width: 100%; /* Allow track to take full width */
-        transform: translateX(0) !important; /* Ensure no horizontal transform */
-        animation: none !important; /* Ensure no CSS animation */
-        align-items: center; /* Center cards within the track */
+        display: flex; /* Keep flex for horizontal layout */
+        flex-direction: row; /* Change to row for horizontal layout */
+        gap: 1.5rem;
+        width: max-content; /* Allow track to be as wide as needed */
+        transform: translateX(0); /* Reset transform */
+        animation: none; /* Remove any CSS animation */
+        align-items: stretch; /* Stretch cards to same height */
+        padding: 1rem; /* Add some padding */
     }
 
     .project-card {
-        min-width: 280px; /* Adjusted min-width for better mobile size */
-        max-width: 90%; /* Allow cards to be responsive */
-        margin: 0 auto; /* Center individual cards */
-        height: auto; /* Auto height based on content */
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        opacity: 1; /* Ensure visibility */
-        visibility: visible; /* Ensure visibility */
+        flex: 0 0 280px; /* Fixed width for mobile cards */
+        margin: 0; /* Remove any margins */
+        width: 280px; /* Set explicit width */
     }
 
-     .project-img {
+    .project-img {
         height: 200px; /* Maintain a reasonable image height */
         object-fit: cover;
         border-radius: 12px 12px 0 0;
