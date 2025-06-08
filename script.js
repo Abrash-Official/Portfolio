@@ -22,13 +22,17 @@ document.querySelectorAll('.navbar a').forEach(link => {
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        // Only prevent default for internal navigation links
+        const href = this.getAttribute('href');
+        if (href.startsWith('#') && !this.hasAttribute('target') && !this.hasAttribute('download')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
     });
 });
@@ -440,9 +444,17 @@ function toggleResumeDropdown() {
     
     // Close dropdown when clicking outside
     document.addEventListener('click', function closeDropdown(e) {
-        if (!dropdown.contains(e.target)) {
+        if (!dropdown.contains(e.target) && !dropdown.querySelector('.resume-button').contains(e.target)) {
             dropdown.classList.remove('active');
             document.removeEventListener('click', closeDropdown);
         }
     });
 }
+
+// Attach event listener to the resume button
+document.addEventListener('DOMContentLoaded', () => {
+    const resumeButton = document.querySelector('.resume-button');
+    if (resumeButton) {
+        resumeButton.addEventListener('click', toggleResumeDropdown);
+    }
+});
