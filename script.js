@@ -400,3 +400,35 @@ window.addEventListener('click', function(e) {
         heroImage.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)'; // Reset transform on mouse leave
     });
 })();
+
+// Loading functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingContainer = document.querySelector('.loading-container');
+    const heroSection = document.querySelector('.hero');
+    
+    // Function to check if hero section is fully loaded
+    function isHeroLoaded() {
+        const heroImage = heroSection.querySelector('img');
+        return heroImage.complete && heroImage.naturalHeight !== 0;
+    }
+
+    // Function to hide loading screen
+    function hideLoading() {
+        loadingContainer.classList.add('fade-out');
+        setTimeout(() => {
+            loadingContainer.style.display = 'none';
+        }, 500);
+    }
+
+    // Check if hero section is already loaded
+    if (isHeroLoaded()) {
+        hideLoading();
+    } else {
+        // Wait for hero image to load
+        const heroImage = heroSection.querySelector('img');
+        heroImage.addEventListener('load', hideLoading);
+        
+        // Fallback in case image takes too long to load
+        setTimeout(hideLoading, 5000);
+    }
+});
