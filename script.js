@@ -432,3 +432,17 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(hideLoading, 5000);
     }
 });
+
+// Resume Dropdown Toggle
+function toggleResumeDropdown() {
+    const dropdown = document.querySelector('.resume-dropdown');
+    dropdown.classList.toggle('active');
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function closeDropdown(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+            document.removeEventListener('click', closeDropdown);
+        }
+    });
+}
