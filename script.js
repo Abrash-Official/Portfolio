@@ -42,14 +42,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // if (contactForm) {
 //     contactForm.addEventListener('submit', function(e) {
 //         e.preventDefault();
-        
+
 //         // Get form data
 //         const formData = new FormData(this);
 //         const data = Object.fromEntries(formData);
-        
+
 //         // Here you would typically send the data to a server
 //         console.log('Form submitted:', data);
-        
+
 //         // Show success message
 //         // alert('Thank you for your message! I will get back to you soon.'); // Removed alert
 //         this.reset();
@@ -57,7 +57,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // }
 
 // Contact form animated success message
-(function() {
+(function () {
     const contactForm = document.querySelector('.contact-form');
     if (!contactForm) return;
 
@@ -87,7 +87,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     errorMsg.style.display = 'none';
     contactForm.parentNode.insertBefore(errorMsg, contactForm);
 
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
         // Hide previous messages
@@ -116,40 +116,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             },
             'WSnVwfTbGEPCqzo_0' // Your EmailJS Public Key
         )
-        .then(function(response) {
-            // On success
-            console.log('EmailJS Success:', response);
-            contactForm.reset();
-            // Show animated success message
-            setTimeout(() => {
-                successMsg.style.display = 'block';
-                successMsg.classList.add('show');
-                // Hide after delay
+            .then(function (response) {
+                // On success
+                console.log('EmailJS Success:', response);
+                contactForm.reset();
+                // Show animated success message
                 setTimeout(() => {
-                    successMsg.classList.remove('show');
-                    successMsg.style.display = 'none';
-                }, 4000); // Display for 4 seconds
-            }, 200); // Delay before showing
-        }, function(error) {
-            // On error
-            console.error('EmailJS Error:', error);
-            // Show animated error message
-             setTimeout(() => {
-                errorMsg.style.display = 'block';
-                errorMsg.classList.add('show');
-                // Hide after delay
+                    successMsg.style.display = 'block';
+                    successMsg.classList.add('show');
+                    // Hide after delay
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                        successMsg.style.display = 'none';
+                    }, 4000); // Display for 4 seconds
+                }, 200); // Delay before showing
+            }, function (error) {
+                // On error
+                console.error('EmailJS Error:', error);
+                // Show animated error message
                 setTimeout(() => {
-                    errorMsg.classList.remove('show');
-                    errorMsg.style.display = 'none';
-                }, 4000); // Display for 4 seconds
-            }, 200); // Delay before showing
-        })
-        .finally(() => {
-            // This will run regardless of success or error
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalButtonHTML; // Restore original button HTML
-            submitButton.classList.remove('loading');
-        });
+                    errorMsg.style.display = 'block';
+                    errorMsg.classList.add('show');
+                    // Hide after delay
+                    setTimeout(() => {
+                        errorMsg.classList.remove('show');
+                        errorMsg.style.display = 'none';
+                    }, 4000); // Display for 4 seconds
+                }, 200); // Delay before showing
+            })
+            .finally(() => {
+                // This will run regardless of success or error
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonHTML; // Restore original button HTML
+                submitButton.classList.remove('loading');
+            });
     });
 })();
 
@@ -192,9 +192,9 @@ typeTagline();
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.navbar a, .menu a');
-    
+
     let current = '';
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
@@ -202,7 +202,7 @@ window.addEventListener('scroll', () => {
             current = section.getAttribute('id');
         }
     });
-    
+
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').slice(1) === current) {
@@ -249,30 +249,41 @@ window.addEventListener('scroll', () => {
 */
 
 // Project card modal logic
-const projectCards = document.querySelectorAll('.project-card');
+// Project card modal logic (Event Delegation)
 const modal = document.getElementById('project-modal');
 const modalTitle = document.getElementById('modal-title');
 const modalDesc = document.getElementById('modal-desc');
 const closeModal = document.querySelector('.close-modal');
 
-projectCards.forEach(card => {
-    card.addEventListener('click', function(e) {
-        // Prevent modal on button click
-        if (e.target.closest('.project-btn')) return;
+// Use event delegation on the document or a static container
+document.addEventListener('click', function (e) {
+    const card = e.target.closest('.project-card');
+    // If a project card was clicked
+    if (card) {
+        // Check if a button was clicked
+        const btn = e.target.closest('.project-btn');
+        if (btn) {
+            // Prevent default behavior for placeholder links
+            if (btn.getAttribute('href') === '#' || btn.getAttribute('href') === '') {
+                e.preventDefault();
+            }
+            return; // Stop modal from opening
+        }
+
         modalTitle.textContent = card.getAttribute('data-title');
         modalDesc.textContent = card.getAttribute('data-description');
         modal.classList.add('active');
-    });
+    }
 });
 if (closeModal) {
     closeModal.addEventListener('click', () => modal.classList.remove('active'));
 }
-window.addEventListener('click', function(e) {
+window.addEventListener('click', function (e) {
     if (e.target === modal) modal.classList.remove('active');
 });
 
 // --- Infinite Projects Carousel with JavaScript ---
-(function() {
+(function () {
     const carousel = document.querySelector('.projects-carousel');
     const track = document.querySelector('.carousel-track');
     if (!carousel || !track) return;
@@ -298,13 +309,13 @@ window.addEventListener('click', function(e) {
         reqId = requestAnimationFrame(animate);
     }
     animate();
-    // Pause on hover
-    carousel.addEventListener('mouseenter', () => cancelAnimationFrame(reqId));
-    carousel.addEventListener('mouseleave', animate);
+    // Pause on hover - REMOVED as per user request
+    // carousel.addEventListener('mouseenter', () => cancelAnimationFrame(reqId));
+    // carousel.addEventListener('mouseleave', animate);
 })();
 
 // --- Infinite Tech Stack Carousel with JavaScript ---
-(function() {
+(function () {
     const container = document.querySelector('.js-infinite-tech-stack');
     const track1 = container ? container.querySelector('.tech-stack-track.track-1') : null;
     const track2 = container ? container.querySelector('.tech-stack-track.track-2') : null;
@@ -318,7 +329,7 @@ window.addEventListener('click', function(e) {
             track1.appendChild(item.cloneNode(true));
         });
         // Clone a second time for smoother loop
-         items1.forEach(item => {
+        items1.forEach(item => {
             track1.appendChild(item.cloneNode(true));
         });
     }
@@ -328,8 +339,8 @@ window.addEventListener('click', function(e) {
         items2.forEach(item => {
             track2.appendChild(item.cloneNode(true));
         });
-         // Clone a second time for smoother loop
-         items2.forEach(item => {
+        // Clone a second time for smoother loop
+        items2.forEach(item => {
             track2.appendChild(item.cloneNode(true));
         });
     }
@@ -376,14 +387,14 @@ window.addEventListener('click', function(e) {
 })();
 
 // Hero Image Tilt Effect
-(function() {
+(function () {
     const heroImageContainer = document.querySelector('.hero .image');
     const heroImage = heroImageContainer ? heroImageContainer.querySelector('img') : null;
     const tiltAmount = 15; // Maximum tilt in degrees
 
     if (!heroImageContainer || !heroImage) return;
 
-    heroImageContainer.addEventListener('mousemove', function(e) {
+    heroImageContainer.addEventListener('mousemove', function (e) {
         const rect = heroImageContainer.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
@@ -400,16 +411,16 @@ window.addEventListener('click', function(e) {
         heroImage.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
     });
 
-    heroImageContainer.addEventListener('mouseleave', function() {
+    heroImageContainer.addEventListener('mouseleave', function () {
         heroImage.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)'; // Reset transform on mouse leave
     });
 })();
 
 // Loading functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const loadingContainer = document.querySelector('.loading-container');
     const heroSection = document.querySelector('.hero');
-    
+
     // Function to check if hero section is fully loaded
     function isHeroLoaded() {
         const heroImage = heroSection.querySelector('img');
@@ -431,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Wait for hero image to load
         const heroImage = heroSection.querySelector('img');
         heroImage.addEventListener('load', hideLoading);
-        
+
         // Fallback in case image takes too long to load
         setTimeout(hideLoading, 5000);
     }
@@ -441,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function toggleResumeDropdown() {
     const dropdown = document.querySelector('.resume-dropdown');
     dropdown.classList.toggle('active');
-    
+
     // Close dropdown when clicking outside
     document.addEventListener('click', function closeDropdown(e) {
         if (!dropdown.contains(e.target) && !dropdown.querySelector('.resume-button').contains(e.target)) {
