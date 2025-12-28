@@ -270,6 +270,14 @@ document.addEventListener('click', function (e) {
             return; // Stop modal from opening
         }
 
+        // Get image source from the clicked card
+        const img = card.querySelector('.project-img');
+        const modalImg = document.getElementById('modal-img');
+        if (img && modalImg) {
+            modalImg.src = img.src;
+            modalImg.alt = card.getAttribute('data-title');
+        }
+
         modalTitle.textContent = card.getAttribute('data-title');
         modalDesc.textContent = card.getAttribute('data-description');
         modal.classList.add('active');
@@ -290,11 +298,28 @@ window.addEventListener('click', function (e) {
     // Only clone if not already cloned
     if (!track.classList.contains('js-infinite')) {
         track.classList.add('js-infinite');
-        // Clone all cards for seamless infinite scroll
-        const cards = Array.from(track.children);
-        cards.forEach(card => {
+
+        // 1. Ensure the "base set" of content is wide enough to fill a large screen (e.g., 2500px)
+        const originalCards = Array.from(track.children);
+        const cardWidthEstimate = 350; // approx width + gap
+        let currentContentWidth = originalCards.length * cardWidthEstimate;
+        const minWidth = window.innerWidth * 2; // Safety margin
+
+        // Keep appending copies of the original set until we are wide enough
+        while (currentContentWidth < minWidth && currentContentWidth > 0) {
+            originalCards.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.classList.add('clone-base');
+                track.appendChild(clone);
+            });
+            currentContentWidth += originalCards.length * cardWidthEstimate;
+        }
+
+        // 2. Clone the ENTRIE extended set once more for the smooth infinite loop logic (scrollWidth / 2)
+        const extendedCards = Array.from(track.children);
+        extendedCards.forEach(card => {
             const clone = card.cloneNode(true);
-            clone.classList.add('clone');
+            clone.classList.add('clone-loop');
             track.appendChild(clone);
         });
     }
