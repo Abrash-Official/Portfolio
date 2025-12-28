@@ -371,30 +371,46 @@ window.addEventListener('click', function (e) {
     }
 
     let scrollAmount1 = 0;
+    // Track 2 starts shifted by one set width so we can scroll right into the first set
+    // We need to wait for scrollWidth to be populated, but usually with text/icons it's fast enough.
+    // Ideally we'd measure this inside the animation loop if it's 0 initially, but let's try initializing it here or handling 0 start.
     let scrollAmount2 = 0;
+    let initialized2 = false;
+
     let reqId1, reqId2;
     let scrollSpeed = 0.8; // Default speed
     let hoverSpeed = 0.2; // Speed on hover
 
     function animateTrack1() {
         // Scroll Right to Left
-        scrollAmount1 += scrollSpeed; // Use scrollSpeed and increment for right-to-left with negative translateX
-        // Reset when scrolled past the width of the original items (1/3 of total width with 2 clones)
+        scrollAmount1 += scrollSpeed;
         if (scrollAmount1 >= track1.scrollWidth / 3) {
             scrollAmount1 = 0;
         }
-        track1.style.transform = `translateX(-${scrollAmount1}px)`; // Negative for right-to-left
+        track1.style.transform = `translateX(-${scrollAmount1}px)`;
         reqId1 = requestAnimationFrame(animateTrack1);
     }
 
     function animateTrack2() {
-        // Scroll Left to Right
-        scrollAmount2 -= scrollSpeed; // Decrement for left-to-right movement
-        // Reset when scrolled past the beginning of the original items
-        if (scrollAmount2 <= -track2.scrollWidth / 3) {
-            scrollAmount2 = 0; // Reset to show the beginning of the cloned track
+        // Initialize logic for Track 2 (Left to Right)
+        // We want to start at offset -W/3 and move towards 0.
+        // Coordinate system: translate decreasing magnitude of negative number ( -100 -> -99 )
+
+        if (!initialized2 && track2.scrollWidth > 0) {
+            scrollAmount2 = track2.scrollWidth / 3;
+            initialized2 = true;
         }
-        track2.style.transform = `translateX(${scrollAmount2}px)`; // Apply translation for left-to-right
+
+        // Scroll Left to Right: Move from -W/3 towards 0
+        scrollAmount2 -= scrollSpeed;
+
+        // When we reach 0 (start of first set), jump back to -W/3 (start of second set, which looks identical)
+        if (scrollAmount2 <= 0) {
+            scrollAmount2 = track2.scrollWidth / 3;
+        }
+
+        // Apply negative transform
+        track2.style.transform = `translateX(-${scrollAmount2}px)`;
         reqId2 = requestAnimationFrame(animateTrack2);
     }
 
