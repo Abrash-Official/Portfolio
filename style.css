@@ -139,8 +139,9 @@ span {
 }
 
 .nav-link-laptop-right:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(255, 0, 60, 0.6);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 0, 60, 0.4);
+    color: white;
 }
 
 #bar {
@@ -398,81 +399,18 @@ img {
 }
 
 .cta-button:hover {
-    background: linear-gradient(90deg, #ff4d4d 0%, #ff003c 100%);
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 0, 60, 0.6);
+    box-shadow: 0 8px 25px rgba(255, 0, 60, 0.4);
+    color: white;
 }
 
 .secondary-button:hover {
-    background: rgba(255, 0, 60, 0.1);
-    border-color: #ff4d4d;
-    color: #ff4d4d;
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 8px 25px rgba(255, 0, 60, 0.4);
 }
 
 
-/* Resume Dropdown Styles */
-.resume-dropdown {
-    position: relative;
-    display: inline-block;
-}
 
-.resume-button.cta-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.resume-button i {
-    transition: transform 0.3s ease;
-}
-
-.resume-dropdown.active .resume-button i {
-    transform: rotate(180deg);
-}
-
-.resume-dropdown-content {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    background-color: #1a1a1a;
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    z-index: 1000;
-    border: 1px solid rgba(255, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-}
-
-.resume-dropdown.active .resume-dropdown-content {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.resume-dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-}
-
-.resume-dropdown-content a:hover {
-    background-color: rgba(255, 0, 0, 0.1);
-    color: #ff3333;
-}
-
-.resume-dropdown-content a i {
-    width: 20px;
-    text-align: center;
-}
 
 /* About Section */
 .about {

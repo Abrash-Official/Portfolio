@@ -339,92 +339,146 @@ window.addEventListener('click', function (e) {
     // carousel.addEventListener('mouseleave', animate);
 })();
 
-// --- Infinite Tech Stack Carousel with JavaScript ---
+// --- Infinite Tech Stack Carousel with Drag & Resume ---
 (function () {
     const container = document.querySelector('.js-infinite-tech-stack');
     const track1 = container ? container.querySelector('.tech-stack-track.track-1') : null;
     const track2 = container ? container.querySelector('.tech-stack-track.track-2') : null;
     if (!container || !track1 || !track2) return;
 
-    // Only clone if not already cloned
-    if (!track1.classList.contains('js-infinite-cloned')) {
-        track1.classList.add('js-infinite-cloned');
-        const items1 = Array.from(track1.children);
-        items1.forEach(item => {
-            track1.appendChild(item.cloneNode(true));
-        });
-        // Clone a second time for smoother loop
-        items1.forEach(item => {
-            track1.appendChild(item.cloneNode(true));
-        });
-    }
-    if (!track2.classList.contains('js-infinite-cloned')) {
-        track2.classList.add('js-infinite-cloned');
-        const items2 = Array.from(track2.children);
-        items2.forEach(item => {
-            track2.appendChild(item.cloneNode(true));
-        });
-        // Clone a second time for smoother loop
-        items2.forEach(item => {
-            track2.appendChild(item.cloneNode(true));
-        });
-    }
-
-    let scrollAmount1 = 0;
-    // Track 2 starts shifted by one set width so we can scroll right into the first set
-    // We need to wait for scrollWidth to be populated, but usually with text/icons it's fast enough.
-    // Ideally we'd measure this inside the animation loop if it's 0 initially, but let's try initializing it here or handling 0 start.
-    let scrollAmount2 = 0;
-    let initialized2 = false;
-
-    let reqId1, reqId2;
-    let scrollSpeed = 0.8; // Default speed
-    let hoverSpeed = 0.2; // Speed on hover
-
-    function animateTrack1() {
-        // Scroll Right to Left
-        scrollAmount1 += scrollSpeed;
-        if (scrollAmount1 >= track1.scrollWidth / 3) {
-            scrollAmount1 = 0;
+    // 1. Cloning Logic (ensure 3 sets of items for smooth infinite loop)
+    // We clone twice to have [Original] [Clone1] [Clone2]
+    // Infinite loop happens over the width of one set.
+    function setupClones(track) {
+        if (!track.classList.contains('js-infinite-cloned')) {
+            track.classList.add('js-infinite-cloned');
+            const items = Array.from(track.children);
+            // First clone set
+            items.forEach(item => track.appendChild(item.cloneNode(true)));
+            // Second clone set
+            items.forEach(item => track.appendChild(item.cloneNode(true)));
         }
-        track1.style.transform = `translateX(-${scrollAmount1}px)`;
-        reqId1 = requestAnimationFrame(animateTrack1);
     }
 
-    function animateTrack2() {
-        // Initialize logic for Track 2 (Left to Right)
-        // We want to start at offset -W/3 and move towards 0.
-        // Coordinate system: translate decreasing magnitude of negative number ( -100 -> -99 )
+    setupClones(track1);
+    setupClones(track2);
 
-        if (!initialized2 && track2.scrollWidth > 0) {
-            scrollAmount2 = track2.scrollWidth / 3;
-            initialized2 = true;
+    const defaultSpeed = 0.8;
+
+    function setupTrack(track, direction) {
+        // direction: 1 = Moves Left (Track 1)
+        // direction: -1 = Moves Right (Track 2)
+
+        let scrollAmount = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startScroll = 0;
+        let isPaused = false;
+        let resumeTimeout;
+
+        // Wait for layout to ensure scrollWidth is correct
+        // We can just rely on the loop to pick it up, but for initial wrap logic...
+        // Let's just start at 0.
+
+        function animate() {
+            // One set width is total width / 3
+            const maxScroll = track.scrollWidth / 3;
+
+            if (!isDragging && !isPaused && maxScroll > 0) {
+                scrollAmount += defaultSpeed * direction;
+            }
+
+            // Unified Wrap Logic
+            // We want scrollAmount to always be between 0 and maxScroll for the transform
+            // but we allow it to go out of bounds temporarily during calculation
+            if (maxScroll > 0) {
+                scrollAmount = ((scrollAmount % maxScroll) + maxScroll) % maxScroll;
+            }
+
+            track.style.transform = `translateX(-${scrollAmount}px)`;
+            requestAnimationFrame(animate);
         }
 
-        // Scroll Left to Right: Move from -W/3 towards 0
-        scrollAmount2 -= scrollSpeed;
+        // --- Drag Logic ---
 
-        // When we reach 0 (start of first set), jump back to -W/3 (start of second set, which looks identical)
-        if (scrollAmount2 <= 0) {
-            scrollAmount2 = track2.scrollWidth / 3;
+        function getX(e) {
+            return e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
         }
 
-        // Apply negative transform
-        track2.style.transform = `translateX(-${scrollAmount2}px)`;
-        reqId2 = requestAnimationFrame(animateTrack2);
+        function startDrag(e) {
+            // Only allow left click for mouse
+            if (e.type === 'mousedown' && e.button !== 0) return;
+
+            isDragging = true;
+            isPaused = true;
+            startX = getX(e);
+            startScroll = scrollAmount;
+
+            track.style.cursor = 'grabbing';
+            track.style.transition = 'none'; // Disable transition for direct 1:1 movement
+
+            clearTimeout(resumeTimeout);
+        }
+
+        function moveDrag(e) {
+            if (!isDragging) return;
+
+            // Prevent default vertical scroll on touch ONLY if moving mostly horizontally?
+            // For now, simple aggressive prevention to ensure drag works
+            if (e.type === 'touchmove') e.preventDefault();
+
+            const currentX = getX(e);
+            const delta = currentX - startX;
+
+            // If dragging right (delta > 0), we want content to move right.
+            // translateX gets larger (closer to 0 or positive).
+            // Since we use translateX(-scrollAmount), decreasing scrollAmount moves content right.
+            scrollAmount = startScroll - delta;
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.cursor = 'grab';
+
+            // Resume "own zone" movement after 1 second
+            resumeTimeout = setTimeout(() => {
+                isPaused = false;
+            }, 1000);
+        }
+
+        // Listeners
+        track.addEventListener('mousedown', startDrag);
+        // Prevent native drag (ghost image) on links/images
+        track.addEventListener('dragstart', (e) => e.preventDefault());
+
+        // Prevent clicks on links if we dragged
+        track.addEventListener('click', (e) => {
+            if (Math.abs(scrollAmount - startScroll) > 5) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, { capture: true });
+
+        // Bind to window to handle drags that leave the element
+        window.addEventListener('mousemove', moveDrag);
+        window.addEventListener('mouseup', endDrag);
+
+        track.addEventListener('touchstart', startDrag, { passive: false });
+        window.addEventListener('touchmove', moveDrag, { passive: false });
+        window.addEventListener('touchend', endDrag);
+
+        // Initial cursor
+        track.style.cursor = 'grab';
+
+        // Start Animation
+        requestAnimationFrame(animate);
     }
 
-    animateTrack1();
-    animateTrack2();
+    // Initialize
+    setupTrack(track1, 1);  // Track 1 moves Left
+    setupTrack(track2, -1); // Track 2 moves Right
 
-    // Pause on hover (now decrease speed)
-    container.addEventListener('mouseenter', () => {
-        scrollSpeed = hoverSpeed; // Decrease speed
-    });
-
-    container.addEventListener('mouseleave', () => {
-        scrollSpeed = 0.8; // Restore speed
-    });
 })();
 
 // Hero Image Tilt Effect
@@ -489,24 +543,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Resume Dropdown Toggle
-function toggleResumeDropdown() {
-    const dropdown = document.querySelector('.resume-dropdown');
-    dropdown.classList.toggle('active');
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function closeDropdown(e) {
-        if (!dropdown.contains(e.target) && !dropdown.querySelector('.resume-button').contains(e.target)) {
-            dropdown.classList.remove('active');
-            document.removeEventListener('click', closeDropdown);
-        }
-    });
-}
-
-// Attach event listener to the resume button
-document.addEventListener('DOMContentLoaded', () => {
-    const resumeButton = document.querySelector('.resume-button');
-    if (resumeButton) {
-        resumeButton.addEventListener('click', toggleResumeDropdown);
-    }
-});
