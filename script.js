@@ -290,53 +290,111 @@ window.addEventListener('click', function (e) {
     if (e.target === modal) modal.classList.remove('active');
 });
 
-// --- Infinite Projects Carousel with JavaScript ---
+// --- Infinite Projects Carousel with Drag & Resume ---
 (function () {
     const carousel = document.querySelector('.projects-carousel');
     const track = document.querySelector('.carousel-track');
     if (!carousel || !track) return;
-    // Only clone if not already cloned
-    if (!track.classList.contains('js-infinite')) {
-        track.classList.add('js-infinite');
 
-        // 1. Ensure the "base set" of content is wide enough to fill a large screen (e.g., 2500px)
-        const originalCards = Array.from(track.children);
-        const cardWidthEstimate = 350; // approx width + gap
-        let currentContentWidth = originalCards.length * cardWidthEstimate;
-        const minWidth = window.innerWidth * 2; // Safety margin
+    // 1. Cloning Logic (ensure 3 sets of items for smooth infinite loop)
+    function setupClones(catrack) {
+        if (!catrack.classList.contains('js-infinite-cloned')) {
+            catrack.classList.add('js-infinite-cloned');
+            const items = Array.from(catrack.children);
+            items.forEach(item => catrack.appendChild(item.cloneNode(true)));
+            items.forEach(item => catrack.appendChild(item.cloneNode(true)));
+        }
+    }
 
-        // Keep appending copies of the original set until we are wide enough
-        while (currentContentWidth < minWidth && currentContentWidth > 0) {
-            originalCards.forEach(card => {
-                const clone = card.cloneNode(true);
-                clone.classList.add('clone-base');
-                track.appendChild(clone);
-            });
-            currentContentWidth += originalCards.length * cardWidthEstimate;
+    setupClones(track);
+
+    const defaultSpeed = 0.5; // Keeping the requested speed (was 0.5 in previous code)
+
+    function setupTrack(track, direction) {
+        let scrollAmount = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startScroll = 0;
+        let isPaused = false;
+        let resumeTimeout;
+
+        function animate() {
+            const maxScroll = track.scrollWidth / 3;
+
+            if (!isDragging && !isPaused && maxScroll > 0) {
+                scrollAmount += defaultSpeed * direction;
+            }
+
+            if (maxScroll > 0) {
+                scrollAmount = ((scrollAmount % maxScroll) + maxScroll) % maxScroll;
+            }
+
+            track.style.transform = `translateX(-${scrollAmount}px)`;
+            requestAnimationFrame(animate);
         }
 
-        // 2. Clone the ENTRIE extended set once more for the smooth infinite loop logic (scrollWidth / 2)
-        const extendedCards = Array.from(track.children);
-        extendedCards.forEach(card => {
-            const clone = card.cloneNode(true);
-            clone.classList.add('clone-loop');
-            track.appendChild(clone);
-        });
-    }
-    let scrollAmount = 0;
-    let reqId;
-    function animate() {
-        scrollAmount += 0.5; // Adjust speed here - decreased from 1.1
-        if (scrollAmount >= track.scrollWidth / 2) {
-            scrollAmount = 0;
+        // --- Drag Logic ---
+        function getX(e) {
+            return e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
         }
-        track.style.transform = `translateX(-${scrollAmount}px)`;
-        reqId = requestAnimationFrame(animate);
+
+        function startDrag(e) {
+            if (e.type === 'mousedown' && e.button !== 0) return;
+
+            isDragging = true;
+            isPaused = true;
+            startX = getX(e);
+            startScroll = scrollAmount;
+
+            track.style.cursor = 'grabbing';
+            track.style.transition = 'none';
+
+            clearTimeout(resumeTimeout);
+        }
+
+        function moveDrag(e) {
+            if (!isDragging) return;
+            if (e.type === 'touchmove') e.preventDefault();
+
+            const currentX = getX(e);
+            const delta = currentX - startX;
+            scrollAmount = startScroll - delta;
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.cursor = 'grab';
+
+            resumeTimeout = setTimeout(() => {
+                isPaused = false;
+            }, 1000);
+        }
+
+        track.addEventListener('mousedown', startDrag);
+        track.addEventListener('dragstart', (e) => e.preventDefault());
+
+        // Prevent clicks on links/buttons if we dragged
+        track.addEventListener('click', (e) => {
+            if (Math.abs(scrollAmount - startScroll) > 5) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, { capture: true });
+
+        window.addEventListener('mousemove', moveDrag);
+        window.addEventListener('mouseup', endDrag);
+
+        track.addEventListener('touchstart', startDrag, { passive: false });
+        window.addEventListener('touchmove', moveDrag, { passive: false });
+        window.addEventListener('touchend', endDrag);
+
+        track.style.cursor = 'grab';
+        requestAnimationFrame(animate);
     }
-    animate();
-    // Pause on hover - REMOVED as per user request
-    // carousel.addEventListener('mouseenter', () => cancelAnimationFrame(reqId));
-    // carousel.addEventListener('mouseleave', animate);
+
+    // Initialize (Direction 1 = Left)
+    setupTrack(track, 1);
 })();
 
 // --- Infinite Tech Stack Carousel with Drag & Resume ---
