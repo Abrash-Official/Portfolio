@@ -290,13 +290,13 @@ window.addEventListener('click', function (e) {
     if (e.target === modal) modal.classList.remove('active');
 });
 
-// --- Infinite Projects Carousel with Drag & Resume ---
+// --- Infinite Projects Carousel with Drag & Momentum ---
 (function () {
     const carousel = document.querySelector('.projects-carousel');
     const track = document.querySelector('.carousel-track');
     if (!carousel || !track) return;
 
-    // 1. Cloning Logic (ensure 3 sets of items for smooth infinite loop)
+    // 1. Cloning Logic
     function setupClones(catrack) {
         if (!catrack.classList.contains('js-infinite-cloned')) {
             catrack.classList.add('js-infinite-cloned');
@@ -308,32 +308,55 @@ window.addEventListener('click', function (e) {
 
     setupClones(track);
 
-    const defaultSpeed = 0.5; // Keeping the requested speed (was 0.5 in previous code)
+    const defaultSpeed = 0.5;
 
     function setupTrack(track, direction) {
-        let scrollAmount = 0;
-        let isDragging = false;
-        let startX = 0;
-        let startScroll = 0;
-        let isPaused = false;
-        let resumeTimeout;
 
-        function animate() {
+        let state = {
+            scrollAmount: 0,
+            isDragging: false,
+            startX: 0,
+            startScroll: 0,
+            velocity: 0,
+            lastX: 0,
+            lastTime: 0,
+            animationId: null
+        };
+
+        function animate(time) {
             const maxScroll = track.scrollWidth / 3;
-
-            if (!isDragging && !isPaused && maxScroll > 0) {
-                scrollAmount += defaultSpeed * direction;
+            if (maxScroll <= 0) {
+                state.animationId = requestAnimationFrame(animate);
+                return;
             }
 
-            if (maxScroll > 0) {
-                scrollAmount = ((scrollAmount % maxScroll) + maxScroll) % maxScroll;
+            if (!state.isDragging) {
+                // Deceleration (Friction)
+                // Using 0.99 for long smooth slides
+                const friction = 0.99;
+                const stopThreshold = 0.1;
+
+                if (Math.abs(state.velocity) > stopThreshold) {
+                    // --- Momentum Phase ---
+                    state.scrollAmount += state.velocity;
+                    state.velocity *= friction;
+                } else {
+                    // --- Normal Phase ---
+                    const targetSpeed = defaultSpeed * direction;
+                    state.velocity += (targetSpeed - state.velocity) * 0.05; // Ease back to normal speed
+                    state.scrollAmount += state.velocity;
+                }
             }
 
-            track.style.transform = `translateX(-${scrollAmount}px)`;
-            requestAnimationFrame(animate);
+            // Wrap Logic
+            state.scrollAmount = ((state.scrollAmount % maxScroll) + maxScroll) % maxScroll;
+
+            track.style.transform = `translateX(-${state.scrollAmount}px)`;
+            state.animationId = requestAnimationFrame(animate);
         }
 
         // --- Drag Logic ---
+
         function getX(e) {
             return e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
         }
@@ -341,42 +364,55 @@ window.addEventListener('click', function (e) {
         function startDrag(e) {
             if (e.type === 'mousedown' && e.button !== 0) return;
 
-            isDragging = true;
-            isPaused = true;
-            startX = getX(e);
-            startScroll = scrollAmount;
+            state.isDragging = true;
+            state.startX = getX(e);
+            state.startScroll = state.scrollAmount;
+            state.lastX = state.startX;
+            state.lastTime = performance.now();
+            state.velocity = 0;
 
             track.style.cursor = 'grabbing';
             track.style.transition = 'none';
-
-            clearTimeout(resumeTimeout);
         }
 
         function moveDrag(e) {
-            if (!isDragging) return;
+            if (!state.isDragging) return;
             if (e.type === 'touchmove') e.preventDefault();
 
             const currentX = getX(e);
-            const delta = currentX - startX;
-            scrollAmount = startScroll - delta;
+            const currentTime = performance.now();
+            const deltaX = currentX - state.startX;
+
+            state.scrollAmount = state.startScroll - deltaX;
+
+            // Calculate Velocity
+            const deltaTime = currentTime - state.lastTime;
+            const dist = state.lastX - currentX;
+
+            if (deltaTime > 0) {
+                // Multiplied by 3 for much faster reaction to flick (Expert Mode)
+                state.velocity = (dist / (deltaTime / 16)) * 3;
+            }
+
+            state.lastX = currentX;
+            state.lastTime = currentTime;
         }
 
         function endDrag() {
-            if (!isDragging) return;
-            isDragging = false;
+            if (!state.isDragging) return;
+            state.isDragging = false;
             track.style.cursor = 'grab';
 
-            resumeTimeout = setTimeout(() => {
-                isPaused = false;
-            }, 1000);
+            // Limit max velocity
+            const maxV = 120;
+            state.velocity = Math.max(Math.min(state.velocity, maxV), -maxV);
         }
 
         track.addEventListener('mousedown', startDrag);
         track.addEventListener('dragstart', (e) => e.preventDefault());
 
-        // Prevent clicks on links/buttons if we dragged
         track.addEventListener('click', (e) => {
-            if (Math.abs(scrollAmount - startScroll) > 5) {
+            if (Math.abs(state.scrollAmount - state.startScroll) > 5) {
                 e.preventDefault();
                 e.stopPropagation();
             }
@@ -390,7 +426,8 @@ window.addEventListener('click', function (e) {
         window.addEventListener('touchend', endDrag);
 
         track.style.cursor = 'grab';
-        requestAnimationFrame(animate);
+
+        state.animationId = requestAnimationFrame(animate);
     }
 
     // Initialize (Direction 1 = Left)
