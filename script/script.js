@@ -397,23 +397,19 @@ window.addEventListener('click', function (e) {
     setupTrack(track, 1);
 })();
 
-// --- Infinite Tech Stack Carousel with Drag & Resume ---
+// --- Infinite Tech Stack Carousel with Drag & Momentum ---
 (function () {
     const container = document.querySelector('.js-infinite-tech-stack');
     const track1 = container ? container.querySelector('.tech-stack-track.track-1') : null;
     const track2 = container ? container.querySelector('.tech-stack-track.track-2') : null;
     if (!container || !track1 || !track2) return;
 
-    // 1. Cloning Logic (ensure 3 sets of items for smooth infinite loop)
-    // We clone twice to have [Original] [Clone1] [Clone2]
-    // Infinite loop happens over the width of one set.
+    // 1. Cloning Logic
     function setupClones(track) {
         if (!track.classList.contains('js-infinite-cloned')) {
             track.classList.add('js-infinite-cloned');
             const items = Array.from(track.children);
-            // First clone set
             items.forEach(item => track.appendChild(item.cloneNode(true)));
-            // Second clone set
             items.forEach(item => track.appendChild(item.cloneNode(true)));
         }
     }
@@ -424,37 +420,70 @@ window.addEventListener('click', function (e) {
     const defaultSpeed = 0.8;
 
     function setupTrack(track, direction) {
-        // direction: 1 = Moves Left (Track 1)
-        // direction: -1 = Moves Right (Track 2)
+        // direction: 1 = Moves Left (Normal flow for Track 1)
+        // direction: -1 = Moves Right (Normal flow for Track 2)
 
-        let scrollAmount = 0;
-        let isDragging = false;
-        let startX = 0;
-        let startScroll = 0;
-        let isPaused = false;
-        let resumeTimeout;
+        // State identifiers
+        let state = {
+            scrollAmount: 0,
+            isDragging: false,
+            startX: 0,
+            startScroll: 0,
+            velocity: 0,
+            lastX: 0,
+            lastTime: 0,
+            animationId: null
+        };
 
-        // Wait for layout to ensure scrollWidth is correct
-        // We can just rely on the loop to pick it up, but for initial wrap logic...
-        // Let's just start at 0.
-
-        function animate() {
-            // One set width is total width / 3
+        function animate(time) {
             const maxScroll = track.scrollWidth / 3;
-
-            if (!isDragging && !isPaused && maxScroll > 0) {
-                scrollAmount += defaultSpeed * direction;
+            if (maxScroll <= 0) {
+                state.animationId = requestAnimationFrame(animate);
+                return;
             }
 
-            // Unified Wrap Logic
-            // We want scrollAmount to always be between 0 and maxScroll for the transform
-            // but we allow it to go out of bounds temporarily during calculation
-            if (maxScroll > 0) {
-                scrollAmount = ((scrollAmount % maxScroll) + maxScroll) % maxScroll;
+            if (state.isDragging) {
+                // While dragging, just ensure wrapping for visual consistency
+                // Position is set directly by moveDrag
+            } else {
+                // Not dragging: Check for Momentum or Normal Flow
+
+                // Deceleration (Friction)
+                // Lower friction (closer to 1) means it slides for longer (slower deceleration)
+                const friction = 0.99;
+                // Threshold to switch back to constant speed
+                const stopThreshold = 0.1;
+
+                if (Math.abs(state.velocity) > stopThreshold) {
+                    // --- Momentum Phase ---
+                    state.scrollAmount += state.velocity; // Move by current velocity
+                    state.velocity *= friction;           // Decay velocity
+
+                    // If we get close to the normal speed in the correct direction, we can blend/snap to it?
+                    // Actually, let's just decay to near zero, then gently ramp up or switch to normal.
+                    // For simplicity: Decay until very slow, then switch to normal constant movement.
+                } else {
+                    // --- Normal Phase ---
+                    // "moves normal" means constant speed in the default direction.
+                    // We can interpolate velocity towards defaultSpeed * direction if we want it super smooth,
+                    // but switching when velocity is low is usually fine using a simple lerp or direct switch.
+
+                    // Let's Lerp back to default speed for smoothness
+                    const targetSpeed = defaultSpeed * direction;
+                    state.velocity += (targetSpeed - state.velocity) * 0.05; // Ease back to normal speed
+
+                    state.scrollAmount += state.velocity;
+                }
             }
 
-            track.style.transform = `translateX(-${scrollAmount}px)`;
-            requestAnimationFrame(animate);
+            // Wrap Logic
+            state.scrollAmount = ((state.scrollAmount % maxScroll) + maxScroll) % maxScroll;
+
+            // Apply Transform
+            // Note: We use negative scrollAmount for Left movement logic
+            track.style.transform = `translateX(-${state.scrollAmount}px)`;
+
+            state.animationId = requestAnimationFrame(animate);
         }
 
         // --- Drag Logic ---
@@ -464,61 +493,69 @@ window.addEventListener('click', function (e) {
         }
 
         function startDrag(e) {
-            // Only allow left click for mouse
             if (e.type === 'mousedown' && e.button !== 0) return;
 
-            isDragging = true;
-            isPaused = true;
-            startX = getX(e);
-            startScroll = scrollAmount;
+            state.isDragging = true;
+            state.startX = getX(e);
+            state.startScroll = state.scrollAmount;
+            state.lastX = state.startX;
+            state.lastTime = performance.now();
+            state.velocity = 0;
 
             track.style.cursor = 'grabbing';
-            track.style.transition = 'none'; // Disable transition for direct 1:1 movement
-
-            clearTimeout(resumeTimeout);
+            track.style.transition = 'none';
         }
 
         function moveDrag(e) {
-            if (!isDragging) return;
-
-            // Prevent default vertical scroll on touch ONLY if moving mostly horizontally?
-            // For now, simple aggressive prevention to ensure drag works
+            if (!state.isDragging) return;
             if (e.type === 'touchmove') e.preventDefault();
 
             const currentX = getX(e);
-            const delta = currentX - startX;
+            const currentTime = performance.now();
+            const deltaX = currentX - state.startX;
 
-            // If dragging right (delta > 0), we want content to move right.
-            // translateX gets larger (closer to 0 or positive).
-            // Since we use translateX(-scrollAmount), decreasing scrollAmount moves content right.
-            scrollAmount = startScroll - delta;
+            // Direct 1:1 movement
+            // Dragging left (negative delta) should increase scrollAmount (moving content left)
+            // Dragging right (positive delta) should decrease scrollAmount (moving content right)
+            state.scrollAmount = state.startScroll - deltaX;
+
+            // Calculate Velocity
+            // Velocity = distance / time
+            const deltaTime = currentTime - state.lastTime;
+            const dist = state.lastX - currentX; // Distance moved this frame (inverted for scrollAmount logic)
+
+            if (deltaTime > 0) {
+                // Higher multiplier = more sensitive "throw"
+                // Multiplied by 3 for much faster reaction to flick
+                state.velocity = (dist / (deltaTime / 16)) * 3;
+            }
+
+            state.lastX = currentX;
+            state.lastTime = currentTime;
         }
 
         function endDrag() {
-            if (!isDragging) return;
-            isDragging = false;
+            if (!state.isDragging) return;
+            state.isDragging = false;
             track.style.cursor = 'grab';
 
-            // Resume "own zone" movement after 1 second
-            resumeTimeout = setTimeout(() => {
-                isPaused = false;
-            }, 1000);
+            // Limit max velocity to prevent crazy speeds
+            const maxV = 120; // Increased max speed significantly
+            state.velocity = Math.max(Math.min(state.velocity, maxV), -maxV);
+
+            // Velocity is now passed to the animate loop which handles the decay
         }
 
         // Listeners
         track.addEventListener('mousedown', startDrag);
-        // Prevent native drag (ghost image) on links/images
         track.addEventListener('dragstart', (e) => e.preventDefault());
-
-        // Prevent clicks on links if we dragged
         track.addEventListener('click', (e) => {
-            if (Math.abs(scrollAmount - startScroll) > 5) {
+            if (Math.abs(state.scrollAmount - state.startScroll) > 5) {
                 e.preventDefault();
                 e.stopPropagation();
             }
         }, { capture: true });
 
-        // Bind to window to handle drags that leave the element
         window.addEventListener('mousemove', moveDrag);
         window.addEventListener('mouseup', endDrag);
 
@@ -526,11 +563,10 @@ window.addEventListener('click', function (e) {
         window.addEventListener('touchmove', moveDrag, { passive: false });
         window.addEventListener('touchend', endDrag);
 
-        // Initial cursor
         track.style.cursor = 'grab';
 
-        // Start Animation
-        requestAnimationFrame(animate);
+        // Start Loop
+        state.animationId = requestAnimationFrame(animate);
     }
 
     // Initialize
