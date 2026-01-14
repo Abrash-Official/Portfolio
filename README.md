@@ -84,7 +84,7 @@ I'm always open to collaboration and learning. If you're working on something ex
 
 ## 📬 Contact
 
-- **Email:** [abrasharshadofficial@gmail.com](mailto:abrasharshadofficial@gmail.com)
+- **Email:** [abrash.official100@gmail.com](mailto:abrash.official100@gmail.com)
 - **LinkedIn:** [linkedin.com/in/abrashofficial](https://www.linkedin.com/in/abrashofficial/)
 - **LeetCode:** [leetcode.com/u/Abrash-Official/](https://leetcode.com/u/Abrash-Official/)
 - **GitHub:** [github.com/Abrash-Official](https://github.com/Abrash-Official)
