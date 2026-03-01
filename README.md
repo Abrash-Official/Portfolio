@@ -2,7 +2,7 @@
  
 <p align="center">
   <b>🚀 Explore my work, skills, and journey in tech!</b><br>
-  <a href="https://abrash-official.netlify.app/">🌐 Live Portfolio</a> •
+  <a href="https://abrash.dev/">🌐 Live Portfolio</a> •
   <a href="https://github.com/Abrash-Official/Portfolio">GitHub Repo</a>
 </p>
 
@@ -12,7 +12,7 @@
 
 This is the source code for my personal developer portfolio, built to showcase my projects, skills, and experience in web development, machine learning, and more. The site is fully responsive and features modern UI/UX, interactive effects, and a clean, accessible design.
 
-- **Live Demo:** [abrash-official.netlify.app](https://abrash-official.netlify.app/)
+- **Live Demo:** [abrash.dev](https://abrash.dev/)
 - **Tech Stack:** HTML5, CSS3, JavaScript
 
 ---
@@ -84,7 +84,7 @@ I'm always open to collaboration and learning. If you're working on something ex
 
 ## 📬 Contact
 
-- **Email:** [abrasharshadofficial@gmail.com](mailto:abrasharshadofficial@gmail.com)
+- **Email:** [abrash.official100@gmail.com](mailto:abrash.official100@gmail.com)
 - **LinkedIn:** [linkedin.com/in/abrashofficial](https://www.linkedin.com/in/abrashofficial/)
 - **LeetCode:** [leetcode.com/u/Abrash-Official/](https://leetcode.com/u/Abrash-Official/)
 - **GitHub:** [github.com/Abrash-Official](https://github.com/Abrash-Official)
