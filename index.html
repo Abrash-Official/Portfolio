@@ -1,368 +1,621 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrash Official | ML, AI, Robotics Portfolio</title>
-    <meta name="description"
-        content="Official portfolio of Abrash Official. Connect on LinkedIn, GitHub, LeetCode, and explore my AI, ML, and Robotics projects.">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/loading.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- Favicon -->
-    <link rel="icon" href="assets/favicon.webp" type="image/webp">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Abrash Official",
-      "url": "https://abrash.dev/",
-      "sameAs": [
-        "https://github.com/Abrash-Official",
-        "https://www.linkedin.com/in/abrashofficial/",
-        "https://leetcode.com/u/Abrash-Official/"
-      ]
-    }
-    </script>
-    <meta name="google-site-verification" content="zjhvj4dkCfH_43MIV2f2TgH7bNiqvGKio3IN75Oak3Q" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Abrash Arshad PORTFOLIO / Ai Engineer / Fast Learner">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Abrash_Official">
+  <meta property="og:site_name" content="Abrash Arshad PORTFOLIO">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Abrash Arshad PORTFOLIO">
+  <title>Abrash Arshad PORTFOLIO</title>
+  <link rel="stylesheet" href="assets/css/jquery.fullPage.css">
+  <link rel="stylesheet" href="assets/css/common.css">
+  <link rel="stylesheet" href="assets/css/all.css">
+  <link rel="stylesheet" href="assets/css/google-fonts.css">
+  <link rel="stylesheet" href="assets/css/awwwards.css">
 </head>
-
 <body>
-    <div class="loading-container">
-        <div class="loading-bar">
-            <div class="loading-progress"></div>
-        </div>
-        <div class="loading-text">Loading Portfolio...</div>
+  <header>
+    <a class="name" href="#top">Abrash Arshad</a>
+    <div class="wrap">
+      <div class="icons">
+        <a href="https://www.linkedin.com/in/abrasharshad/" target="_blank" rel="noopener" aria-label="LinkedIn"><img class="social-icon" src="assets/img/icons/linkedin.svg" alt="LinkedIn"></a>
+        <a href="https://leetcode.com/u/Abrash-Official/" target="_blank" rel="noopener" aria-label="LeetCode"><img class="social-icon" src="assets/img/icons/leetcode.svg" alt="LeetCode"></a>
+        <a href="https://github.com/Abrash-Official" target="_blank" rel="noopener">Abrash-Official</a>
+      </div>
+      <div class="menuIcon js-menuBtn"></div>
     </div>
-    <header class="nav">
-        <a href="#home">
-            <h1>Abrash <span>Official</span></h1>
-        </a>
-        <i class="fa-solid fa-bars" id="bar" onclick="showSidebar()"></i>
-        <ul class="navbar">
-            <a href="#send-message-form" class="nav-link-right">Send Message</a>
-            <a href="#home">
-                <li class="nav-link">Home</li>
-            </a>
-            <a href="#about">
-                <li class="nav-link">About Me</li>
-            </a>
-            <a href="#skills">
-                <li class="nav-link">Skills</li>
-            </a>
-            <a href="#projects">
-                <li class="nav-link">Projects</li>
-            </a>
-            <a href="#contact">
-                <li class="nav-link">Contact</li>
-            </a>
-        </ul>
-        <a href="#send-message-form" class="nav-link-laptop-right">Send Message</a>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content" data-aos="fade-right">
-                <div class="data">
-                    <span class="mobile-hide">
-                        <h5><span class="siz">Hello,</span> My name is</h5>
-                    </span>
-                    <span class="name">
-                        <h1 class="nam">Abrash Arshad</h1>
-                    </span>
-                    <h4 class="hero-title-typing"><span id="typed-text"></span><span class="cursor">|</span></h4>
-                    <div class="hero-buttons">
-                        <a href="assets/Abrash_Resume.pdf" target="_blank" class="cta-button">Resume</a>
-                        <a href="#projects" class="secondary-button">View Projects</a>
-                    </div>
-                </div>
-                <div class="scroll-down">
-                    <span>Scroll Down</span>
-                    <i class="fa-solid fa-angles-down"></i>
-                </div>
-            </div>
-            <div class="image" data-aos="fade-left">
-                <img src="assets/Student.webp" alt="Muhammad Abrash">
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about">
-            <h2 class="section-title" data-aos="fade-up">About Me</h2>
-            <div class="about-content">
-                <div class="about-image" data-aos="fade-right">
-                    <img src="assets/Student.webp" alt="Muhammad Abrash">
-                </div>
-                <div class="about-text" data-aos="fade-left">
-                    <h3 class="about-subheading">My Journey & Skills</h3>
-                    <p>Hi, I'm Abrash Arshad, a passionate Computer Science undergraduate currently pursuing my BSCS at
-                        the Institute for Arts and Culture, Lahore. With a CGPA of 3.5/4, I'm on a journey to become a
-                        skilled Machine Learning or Robotics Engineer, driven by curiosity and a love for building
-                        intelligent systems.</p>
-
-                    <p>I have hands-on experience with Python, C++(Basic), and tools like NumPy, Pandas, Matplotlib, and
-                        SpeechRecognition, and I'm currently diving deep into AI programming and the core mathematics
-                        behind machine learning. I've also worked on projects like Sign Language Recognition and Speech
-                        Recognition Analysis, which reflect my strong interest in computer vision and natural language
-                        processing.</p>
-
-                    <p>Beyond academics, I actively solve coding challenges on LeetCode (130+ problems solved) and
-                        constantly improve my problem-solving and DSA skills. My dream is to contribute to companies at
-                        the frontier of innovation — like Tesla — where AI meets real-world impact.</p>
-
-                    <p>I'm always open to collaboration, learning, and meaningful connections. If you're working on
-                        something exciting in AI/ML, feel free to reach out — I'd love to collaborate!</p>
-                    <div class="about-details">
-                        <!-- Removed detail items as requested -->
-                    </div>
-                    <p class="mobile-only-about">Hi, I'm <strong>Abrash Arshad</strong>, a <strong>Computer
-                            Science</strong> undergraduate at the <strong>Institute for Arts and Culture</strong>,
-                        Lahore. I'm passionate about Machine Learning and Robotics, with a 3.5/4 CGPA. <br><br>I have
-                        experience in Python, C++, and tools like NumPy and Pandas. I've worked on projects like Sign
-                        Language Recognition and Speech Recognition Analysis. I'm actively solving coding challenges on
-                        LeetCode and aim to contribute to innovative companies like Tesla. I'm open to collaboration!
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="skills">
-            <h2 class="section-title" data-aos="fade-up">Tech Stack</h2>
-            <div class="skills-container js-infinite-tech-stack">
-                <div class="tech-stack-track track-1">
-                    <a href="https://github.com/Abrash-Official" target="_blank" class="tech-stack-item">
-                        <i class="fab fa-python"></i>
-                        <span>Python</span>
-                    </a>
-                    <a href="https://leetcode.com/u/Abrash-Official/" target="_blank" class="tech-stack-item">
-                        <i class="fas fa-cube"></i>
-                        <span>OOP</span>
-                    </a>
-                    <a href="https://leetcode.com/u/Abrash-Official/" target="_blank" class="tech-stack-item">
-                        <i class="fas fa-code-branch"></i>
-                        <span>DSA</span>
-                    </a>
-                    <a href="https://leetcode.com/u/Abrash-Official/" target="_blank" class="tech-stack-item">
-                        <i class="fas fa-code"></i>
-                        <span>LeetCode</span>
-                    </a>
-                    <a href="https://github.com/Abrash-Official" target="_blank" class="tech-stack-item">
-                        <i class="fab fa-github"></i>
-                        <span>Github</span>
-                    </a>
-                </div>
-                <div class="tech-stack-track track-2">
-                    <a href="https://github.com/Abrash-Official" target="_blank" class="tech-stack-item">
-                        <i class="fas fa-brain"></i>
-                        <span>Machine Learning</span>
-                    </a>
-                    <a href="https://github.com/Abrash-Official" target="_blank" class="tech-stack-item">
-                        <i class="fas fa-eye"></i>
-                        <span>Computer Vision</span>
-                    </a>
-                    <a href="https://github.com/Abrash-Official" target="_blank" class="tech-stack-item">
-                        <i class="fas fa-table"></i>
-                        <span>Pandas</span>
-                    </a>
-                    <a href="https://github.com/Abrash-Official" target="_blank" class="tech-stack-item">
-                        <i class="fas fa-calculator"></i>
-                        <span>Numpy</span>
-                    </a>
-                    <a href="https://github.com/Abrash-Official" target="_blank" class="tech-stack-item">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>Matplotlib</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="projects">
-            <h2 class="section-title" data-aos="fade-up">My Projects</h2>
-            <div class="projects-carousel">
-                <div class="carousel-track">
-
-                    <!-- New Transformer Project Card -->
-                    <div class="project-card" data-title="Transformer"
-                        data-description="A deep learning model implementation of the Transformer architecture, revolutionizing natural language processing tasks.">
-                        <img src="assets/Transformer_Project.webp" alt="Transformer" class="project-img">
-                        <div class="project-content-area">
-                            <h3 class="project-title">Transformer</h3>
-                            <p class="project-description">A deep learning model implementation of the Transformer
-                                architecture, revolutionizing natural language processing tasks.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
-                                <span class="skill-tag"><i class="fas fa-brain"></i> PyTorch</span>
-                            </div>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/drwasimahmadkhan/Learn_Transformers" target="_blank"
-                                class="project-btn github"><i class="fab fa-github"></i>
-                                Code</a>
-                            <a href="https://learn-transformers.netlify.app/" target="_blank"
-                                class="project-btn demo">Live Demo</a>
-                        </div>
-                    </div>
-                    <!-- New Ragchat Bot Project Card -->
-                    <div class="project-card" data-title="Ragchat Bot"
-                        data-description="A RAG (Retrieval-Augmented Generation) based chatbot capable of answering questions based on provided documents.">
-                        <img src="assets/Ragchat_Project.webp" alt="Ragchat Bot" class="project-img">
-                        <div class="project-content-area">
-                            <h3 class="project-title">Ragchat Bot</h3>
-                            <p class="project-description">A RAG (Retrieval-Augmented Generation) based chatbot capable
-                                of answering questions based on provided documents.</p>
-                            <div class="project-skills">
-                                <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
-                                <span class="skill-tag"><i class="fas fa-robot"></i> NLP</span>
-                                <span class="skill-tag"><i class="fas fa-brain"></i> LLM</span>
-                            </div>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/Abrash-Official/Rag_Chatbot" target="_blank"
-                                class="project-btn github"><i class="fab fa-github"></i>
-                                Code</a>
-                            <a href="https://rag-bot-learning.netlify.app/" target="_blank"
-                                class="project-btn demo">Live Demo</a>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div id="project-modal" class="project-modal">
-                <div class="modal-content">
-                    <span class="close-modal">&times;</span>
-                    <img id="modal-img" src="" alt="Project Image" class="modal-img">
-                    <h3 id="modal-title"></h3>
-                    <p id="modal-desc"></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <h2 class="section-title" data-aos="fade-up">Contact Me</h2>
-            <div class="contact-container">
-                <div class="contact-left" data-aos="fade-right">
-                    <h3 class="contact-subheading">Get In Touch</h3>
-                    <p class="contact-description">Passionate about Machine Learning, Deep Learning, and NLP — always
-                        eager to connect and collaborate. Feel free to reach out if you'd like to discuss ideas or build
-                        something together!</p>
-
-                    <div class="contact-info">
-                        <h4 class="info-heading">Contact Information</h4>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>abrash.official100@gmail.com</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+923126852797</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Lahore, Pakistan</span>
-                        </div>
-                    </div>
-
-                    <div class="follow-me">
-                        <h4 class="info-heading">Follow Me</h4>
-                        <div class="social-links contact-social-links">
-                            <a href="https://github.com/Abrash-Official" target="_blank" data-aos="zoom-in"
-                                title="Abrash-Official"><i class="fab fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/abrashofficial/" target="_blank" data-aos="zoom-in"
-                                data-aos-delay="100" title="Abrash-Official"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://leetcode.com/u/Abrash-Official/" target="_blank" data-aos="zoom-in"
-                                data-aos-delay="200" title="Abrash-Official"><i class="fas fa-code"></i></a>
-                            <a href="https://x.com/Abrash_Official" target="_blank" data-aos="zoom-in"
-                                data-aos-delay="250" title="Abrash-Official"><i class="fab fa-x-twitter"></i></a>
-                            <a href="mailto:abrash.official100@gmail.com" target="_blank" data-aos="zoom-in"
-                                data-aos-delay="300" title="abrash.official100@gmail.com"><i
-                                    class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-right" data-aos="fade-left">
-                    <h3 class="contact-subheading">Send Me a Message</h3>
-                    <form class="contact-form" id="send-message-form">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" required placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" required placeholder="Your Email">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" required placeholder="Subject">
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" required placeholder="Your Message"></textarea>
-                        </div>
-                        <button type="submit" class="submit-button">Send Message</button>
-                    </form>
-                </div>
-            </div>
-            <!-- Mobile Only: Send Me a Message Form -->
-            <div class="mobile-message-form">
-                <h3 class="contact-subheading">Send Me a Message</h3>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" name="name" required placeholder="Your Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" required placeholder="Your Email">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="subject" required placeholder="Your Subject">
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" required placeholder="Your Message"></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Abrash Official. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/Abrash-Official" target="_blank" title="Abrash-Official"><i
-                        class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/abrashofficial/" target="_blank" title="Abrash-Official"><i
-                        class="fab fa-linkedin"></i></a>
-                <a href="https://leetcode.com/u/Abrash-Official/" target="_blank" title="Abrash-Official"><i
-                        class="fas fa-code"></i></a>
-                <a href="https://x.com/Abrash_Official" target="_blank" title="Abrash-Official"><i
-                        class="fab fa-x-twitter"></i></a>
-                <a href="mailto:abrash.official100@gmail.com" target="_blank" title="abrash.official100@gmail.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-        (function () {
-            emailjs.init('QwQvQv1QwQvQv1QwQvQv1'); // Replace with your EmailJS public key
-        })();
-    </script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="script/script.js"></script>
-
-    <!-- Fixed Bottom Navigation Bar for Mobile Only -->
-    <nav class="bottom-nav mobile-only">
-        <a href="#home"><i class="fa-solid fa-house"></i><span>Home</span></a>
-        <a href="#about"><i class="fa-solid fa-user"></i><span>About</span></a>
-        <a href="#skills"><i class="fa-solid fa-laptop-code"></i><span>Skills</span></a>
-        <a href="#projects"><i class="fa-solid fa-diagram-project"></i><span>Projects</span></a>
-        <a href="#contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+    <nav class="global-nav">
+      <ul class="global-nav__list">
+        <li><a href="#top">HOME</a></li>
+        <li><a href="#projects">WORKS</a></li>
+        <li><a href="./about">ABOUT ME</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+        <li class="global-nav__sns">
+          <a href="https://www.linkedin.com/in/abrasharshad/" target="_blank" rel="noopener" aria-label="LinkedIn"><img class="social-icon" src="assets/img/icons/linkedin.svg" alt="LinkedIn"></a>
+          <a href="https://leetcode.com/u/Abrash-Official/" target="_blank" rel="noopener" aria-label="LeetCode"><img class="social-icon" src="assets/img/icons/leetcode.svg" alt="LeetCode"></a>
+        </li>
+      </ul>
     </nav>
-</body>
+    <div class="curtain"></div>
+    <div class="loader"></div>
+  </header>
 
+  <main id="barba-wrapper" aria-live="polite">
+    <div class="barba-container" data-namespace="top">
+      <div class="fullpage fullpage-wrapper" id="js-fullpage">
+        <!-- Section 1: Hero -->
+        <div class="section fp-section fp-table" data-anchor="top">
+          <div class="fp-tableCell">
+            <div class="honorable white right" id="awwwards"><a href="http://www.awwwards.com/" target="_blank" rel="noopener">Awwwards</a></div>
+            <div class="fullpage__slide">
+              <div class="title title--top">
+                <h1 class="title__text js-letter">ABRASH<br>ARSHAD</h1>
+                <div class="border js-letter"><span></span><span class="js-letter"></span></div>
+                <p class="title__lead js-letter">Ai Enginner /<br>Fast Learner.</p>
+              </div>
+              <div class="moon">
+                <div class="moon__img js-parallax-moon">
+                  <div class="moon__front layer" data-depth="0.2">
+                    <div class="moon__text-wrap">
+                      <p class="moon__text js-moon" data-depth="0.5">PORTFOLIO</p>
+                    </div>
+                  </div>
+                  <div class="moon__front layer" data-depth="0.8">
+                    <div class="cloud cloud--front1 js-moon"><img src="assets/img/cloud1.svg" alt="cloud"></div>
+                  </div>
+                  <div class="moon__back layer" data-depth="0.4">
+                    <div class="cloud cloud--back2 js-moon"><img src="assets/img/b_cloud02.svg" alt="cloud"></div>
+                  </div>
+                  <div class="moon__front layer" data-depth="0.6">
+                    <div class="cloud cloud--front2 js-moon"><img src="assets/img/cloud2.svg" alt="cloud"></div>
+                  </div>
+                  <div class="moon__back layer" data-depth="0.5">
+                    <img class="js-moon" src="assets/img/moon.svg" alt="moon">
+                  </div>
+                  <div class="moon__front layer" data-depth="0.7">
+                    <div class="cloud cloud--front3 js-moon"><img src="assets/img/cloud3.svg" alt="cloud"></div>
+                  </div>
+                  <div class="moon__back layer" data-depth="0.3">
+                    <div class="cloud cloud--back1 js-moon"><img src="assets/img/b_cloud01.svg" alt="cloud"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Projects (01) -->
+        <div class="section fp-section fp-table" data-anchor="projects">
+          <div class="fp-tableCell">
+            <div class="fullpage__slide">
+              <div class="title">
+                <h2 class="title__text js-letter">Projects</h2>
+                <div class="border js-letter"><span></span><span class="js-letter"></span></div>
+                <p class="title__lead js-letter">Things I've built with<br>passion and code.</p>
+                <div class="btn-wrap js-letter"><a class="btn" href="./projects">Show me more</a></div>
+              </div>
+              <a class="image image--works" href="./projects">
+                <div class="image__over">
+                  <div class="image__cover"></div>
+                  <div class="image__cover"></div>
+                </div>
+                <div class="page-num"><p>01</p></div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: About (02) -->
+        <div class="section fp-section fp-table" data-anchor="about">
+          <div class="fp-tableCell">
+            <div class="fullpage__slide">
+              <div class="title">
+                <h2 class="title__text js-letter">About Me</h2>
+                <div class="border js-letter"><span></span><span class="js-letter"></span></div>
+                <p class="title__lead js-letter">I love Architecture, Technology,<br>and Story.</p>
+                <div class="btn-wrap js-letter"><a class="btn" href="./about">Show me more</a></div>
+              </div>
+              <a class="image image--about" href="./about">
+                <div class="image__over">
+                  <div class="image__cover"></div>
+                  <div class="image__cover"></div>
+                </div>
+                <div class="page-num"><p>02</p></div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Contact (03) -->
+        <div class="section fp-section fp-table" data-anchor="contact">
+          <div class="fp-tableCell">
+            <div class="fullpage__slide">
+              <div class="title">
+                <h2 class="title__text js-letter">Get In Touch</h2>
+                <div class="border js-letter"><span></span><span class="js-letter"></span></div>
+                <ul>
+                  <li class="js-letter"><a href="mailto:abrash.official100@gmail.com">abrash.official100@gmail.com</a></li>
+                  <li class="js-letter"><a href="https://github.com/Abrash-Official" target="_blank" rel="noopener">Abrash-Official</a></li>
+                  <li class="js-letter">
+                    <a href="https://www.linkedin.com/in/abrasharshad/" target="_blank" rel="noopener" aria-label="LinkedIn"><img class="social-icon" src="assets/img/icons/linkedin.svg" alt="LinkedIn"></a>
+                    <a href="https://leetcode.com/u/Abrash-Official/" target="_blank" rel="noopener" aria-label="LeetCode"><img class="social-icon" src="assets/img/icons/leetcode.svg" alt="LeetCode"></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="image image--contact">
+                <div class="image__over">
+                  <div class="image__cover"></div>
+                  <div class="image__cover"></div>
+                </div>
+                <div class="page-num"><p>03</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="scrollDown">SCROLLDOWN</p>
+      <div class="moon-background">
+        <div class="moonlight">
+          <div class="moonlight__wrap js-parallax-moonlight">
+            <div class="layer moonlight__img" data-depth="0.2"></div>
+          </div>
+        </div>
+      </div>
+      <div class="star js-parallax-star">
+        <div class="layer" data-depth="0.1">
+          <div class="star__img"><img src="assets/img/star.svg" alt=""></div>
+        </div>
+      </div>
+      <div class="sky-color"></div>
+    </div>
+  </main>
+
+  <!-- Projects hub (scrollable list) -->
+  <script type="text/template" id="template-projects">
+    <div class="barba-container" data-namespace="underlayer">
+      <div class="page-top">
+        <div class="page-top__inner">
+          <a class="back-arrow" href="./#projects">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="34" viewBox="0 0 67 34"><g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" transform="translate(2 1)"><path stroke-width="2" d="M0,15.5533333 L64,15.5533333"></path><polyline stroke-width="2" points="15.556 0 0 15.556 15.556 31.111"></polyline></g></svg>
+          </a>
+          <p class="scrollDown">SCROLLDOWN</p>
+          <div class="title">
+            <h2 class="title__text">Projects</h2>
+            <div class="border js-toRight"><span></span><span></span></div>
+            <p class="title__lead">Things I've built with<br>passion and code.</p>
+          </div>
+          <div class="image image__projects"></div>
+        </div>
+      </div>
+      <section class="wrapper">
+        <div class="meta" data-emergence="hidden">
+          <div class="meta__back"></div>
+          <div class="content meta__text-wrap">
+            <ul class="meta__text">
+              <li>
+                <p class="small-title">FOCUS</p>
+                <p>AI / ML Engineering &amp; Full-Stack Development</p>
+              </li>
+              <li>
+                <p class="small-title">STACK</p>
+                <p>Python, FastAPI, LangChain, ChromaDB, Groq, HTML/CSS/JS</p>
+              </li>
+              <li>
+                <p class="small-title">OVERVIEW</p>
+                <p>Selected projects spanning retrieval-augmented generation systems and interactive AI education platforms — built to solve real problems and teach complex ideas clearly.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="content"><img src="assets/img/Ragchat_Project.webp" alt="Projects preview"></div>
+        </div>
+
+        <div class="project-entry">
+          <div class="text">
+            <p class="heading-num">01</p>
+            <div class="text__wrap">
+              <h2 class="heading">RAG Chatbot</h2>
+              <p class="text__works">A privacy-focused RAG system that lets users upload PDFs and text files, then ask questions grounded in their own documents using LangChain, ChromaDB, and Groq.</p>
+              <div class="btn-wrap project-entry__btn"><a class="btn" href="./rag">Show me more</a></div>
+            </div>
+          </div>
+          <a class="project-entry__image" href="./rag">
+            <img src="assets/img/Ragchat_Project.webp" alt="RAG Chatbot">
+          </a>
+        </div>
+
+        <div class="project-entry project-entry--reverse">
+          <div class="text">
+            <p class="heading-num">02</p>
+            <div class="text__wrap">
+              <h2 class="heading heading--left">Transformer Learning Hub</h2>
+              <p class="text__works">An interactive learning hub for the Transformer architecture — covering the original paper, mathematics, visual explainers, and 3D LLM visualizations.</p>
+              <div class="btn-wrap project-entry__btn"><a class="btn" href="./transformer">Show me more</a></div>
+            </div>
+          </div>
+          <a class="project-entry__image" href="./transformer">
+            <img src="assets/img/Transformer_Project.webp" alt="Transformer Learning Hub">
+          </a>
+        </div>
+
+        <div class="content content--mlarge back-btn-wrap"><a class="back-btn" href="./#projects">BACK</a></div>
+      </section>
+    </div>
+  </script>
+
+  <!-- RAG Chatbot detail -->
+  <script type="text/template" id="template-rag">
+    <div class="barba-container" data-namespace="underlayer">
+      <div class="page-top">
+        <div class="page-top__inner">
+          <a class="back-arrow" href="./projects">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="34" viewBox="0 0 67 34"><g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" transform="translate(2 1)"><path stroke-width="2" d="M0,15.5533333 L64,15.5533333"></path><polyline stroke-width="2" points="15.556 0 0 15.556 15.556 31.111"></polyline></g></svg>
+          </a>
+          <p class="scrollDown">SCROLLDOWN</p>
+          <div class="title">
+            <h2 class="title__text">RAG<br>Chatbot</h2>
+            <div class="border js-toRight"><span></span><span></span></div>
+            <p class="title__lead">Retrieval-Augmented<br>Generation System</p>
+            <div class="btn-wrap"><a class="btn" href="https://rag-bot-learning.netlify.app/" target="_blank" rel="noopener">Visit site</a></div>
+          </div>
+          <div class="image image__rag"></div>
+        </div>
+      </div>
+      <section class="wrapper">
+        <div class="meta" data-emergence="hidden">
+          <div class="meta__back"></div>
+          <div class="content meta__text-wrap">
+            <ul class="meta__text">
+              <li>
+                <p class="small-title">ROLE</p>
+                <p>AI Engineering / Full-Stack Development</p>
+              </li>
+              <li>
+                <p class="small-title">DATE</p>
+                <p>2025</p>
+              </li>
+              <li>
+                <p class="small-title">OVERVIEW</p>
+                <p>A RAG chatbot that retrieves relevant information from uploaded documents and generates accurate, context-aware answers using LangChain, ChromaDB, and Groq.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="content"><img src="assets/img/Ragchat_Project.webp" alt="RAG Chatbot"></div>
+        </div>
+        <div class="text">
+          <p class="heading-num">01</p>
+          <div class="text__wrap">
+            <h2 class="heading">ARCHITECTURE</h2>
+            <p class="text__works">The system follows a two-phase RAG pipeline. Users upload documents through a FastAPI gateway; LangChain splits content into chunks and ChromaDB stores semantic embeddings. At query time, the system retrieves the most relevant chunks, refines the prompt with Groq, and generates grounded answers — reducing hallucinations while keeping responses fast.</p>
+          </div>
+        </div>
+        <div class="big-image big-image--rag"></div>
+        <div class="text">
+          <p class="heading-num">02</p>
+          <div class="text__wrap">
+            <h2 class="heading heading--left">DEVELOPMENT</h2>
+            <p class="text__works">Built with Python, FastAPI, LangChain, ChromaDB, and Groq (Llama-3). Includes a visual learning slide deck explaining RAG concepts, interactive code demos for chunking and vector search, and a web interface for document upload and chat. Prompt engineering uses system, developer, refine, and answer templates to enforce factual grounding.</p>
+          </div>
+        </div>
+        <div class="kamp">
+          <ul>
+            <li><img src="assets/img/Ragchat_Project.webp" alt="RAG Chatbot interface"></li>
+          </ul>
+        </div>
+        <div class="content content--mlarge project-footer-actions">
+          <a class="back-btn" href="./projects">BACK</a>
+          <a class="project-github-link" href="https://github.com/Abrash-Official/Rag_Chatbot" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </section>
+    </div>
+  </script>
+
+  <!-- Transformer Learning Hub detail -->
+  <script type="text/template" id="template-transformer">
+    <div class="barba-container" data-namespace="underlayer">
+      <div class="page-top">
+        <div class="page-top__inner">
+          <a class="back-arrow" href="./projects">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="34" viewBox="0 0 67 34"><g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" transform="translate(2 1)"><path stroke-width="2" d="M0,15.5533333 L64,15.5533333"></path><polyline stroke-width="2" points="15.556 0 0 15.556 15.556 31.111"></polyline></g></svg>
+          </a>
+          <p class="scrollDown">SCROLLDOWN</p>
+          <div class="title">
+            <h2 class="title__text">Transformer<br>Learning Hub</h2>
+            <div class="border js-toRight"><span></span><span></span></div>
+            <p class="title__lead">Attention is All You Need<br>— Interactive Learning</p>
+            <div class="btn-wrap"><a class="btn" href="https://learn-transformers.netlify.app/" target="_blank" rel="noopener">Visit site</a></div>
+          </div>
+          <div class="image image__transformer"></div>
+        </div>
+      </div>
+      <section class="wrapper">
+        <div class="meta" data-emergence="hidden">
+          <div class="meta__back"></div>
+          <div class="content meta__text-wrap">
+            <ul class="meta__text">
+              <li>
+                <p class="small-title">ROLE</p>
+                <p>Frontend Development / AI Education</p>
+              </li>
+              <li>
+                <p class="small-title">DATE</p>
+                <p>2025</p>
+              </li>
+              <li>
+                <p class="small-title">OVERVIEW</p>
+                <p>An interactive learning hub for the Transformer architecture — covering the original paper, mathematics, visual explainers, and 3D LLM visualizations.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="content"><img src="assets/img/Transformer_Project.webp" alt="Transformer Learning Hub"></div>
+        </div>
+        <div class="text">
+          <p class="heading-num">01</p>
+          <div class="text__wrap">
+            <h2 class="heading">CONCEPT</h2>
+            <p class="text__works">Transformers changed modern AI, but the paper can feel intimidating. This hub breaks the architecture into digestible modules: an interactive slide deck tracing RNNs and LSTMs to self-attention, mathematical deep dives, FAQ sections, author profiles, and links to 40+ foundational research papers.</p>
+          </div>
+        </div>
+        <div class="big-image big-image--transformer"></div>
+        <div class="text">
+          <p class="heading-num">02</p>
+          <div class="text__wrap">
+            <h2 class="heading heading--left">DEVELOPMENT</h2>
+            <p class="text__works">Built with HTML5, CSS3, and JavaScript featuring a premium light theme with glassmorphism, responsive grids, and micro-interactions. Includes an interactive slide-based presentation, paper version viewers, an animated explainer, and a 3D LLM visualization — curated as a single destination for learning Transformer architecture.</p>
+          </div>
+        </div>
+        <div class="kamp">
+          <ul>
+            <li><img src="assets/img/Transformer_Project.webp" alt="Transformer Learning Hub"></li>
+          </ul>
+        </div>
+        <div class="content content--mlarge project-footer-actions">
+          <a class="back-btn" href="./projects">BACK</a>
+          <a class="project-github-link" href="https://github.com/drwasimahmadkhan/Learn_Transformers" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </section>
+    </div>
+  </script>
+
+  <!-- About detail page template -->
+  <script type="text/template" id="template-about">
+    <div class="barba-container" data-namespace="underlayer">
+      <div class="page-top">
+        <div class="page-top__inner">
+          <a class="back-arrow" href="./#about">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="34" viewBox="0 0 67 34"><g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" transform="translate(2 1)"><path stroke-width="2" d="M0,15.5533333 L64,15.5533333"></path><polyline stroke-width="2" points="15.556 0 0 15.556 15.556 31.111"></polyline></g></svg>
+          </a>
+          <p class="scrollDown">SCROLLDOWN</p>
+          <div class="title">
+            <h2 class="title__text">About Me</h2>
+            <div class="border js-toRight"><span></span><span></span></div>
+            <p class="title__lead">I love Architecture, Technology,<br>and Story.</p>
+            <div class="btn-wrap"><a class="btn" href="https://github.com/Abrash-Official" target="_blank" rel="noopener">GitHub</a></div>
+          </div>
+          <div class="image image__about"></div>
+        </div>
+      </div>
+      <section class="wrapper">
+        <div class="who container">
+          <div class="text text--top">
+            <p class="heading-num">01</p>
+            <div class="text__wrap text__wrap--top content">
+              <h2 class="heading heading--top">WHO I AM</h2>
+              <div class="who__wrap">
+                <div class="who__name">
+                  <h3 class="who__jp">Computer Science</h3>
+                  <p class="who__en">ABRASH ARSHAD</p>
+                </div>
+                <p class="who__text">Hi, I'm Abrash Arshad, a passionate Computer Science undergraduate currently pursuing my BSCS at the Institute for Arts and Culture, Lahore. With a CGPA of 3.5/4, I'm on a journey to become a skilled Machine Learning or Robotics Engineer, driven by curiosity and a love for building intelligent systems.<br><br>I have hands-on experience with Python, C++(Basic), and tools like NumPy, Pandas, Matplotlib, and SpeechRecognition, and I'm currently diving deep into AI programming and the core mathematics behind machine learning. I've also worked on projects like Sign Language Recognition and Speech Recognition Analysis, which reflect my strong interest in computer vision and natural language processing.<br><br>Beyond academics, I actively solve coding challenges on LeetCode (130+ problems solved) and constantly improve my problem-solving and DSA skills. My dream is to contribute to companies at the frontier of innovation — like Tesla — where AI meets real-world impact.<br><br>I'm always open to collaboration, learning, and meaningful connections. If you're working on something exciting in AI/ML, feel free to reach out — I'd love to collaborate!</p>
+                <div class="who__image"><img src="assets/img/portrait.png" alt="Abrash Arshad"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="passion container">
+          <div class="text">
+            <p class="heading-num">02</p>
+            <div class="text__wrap content">
+              <h2 class="heading">PASSION</h2>
+            </div>
+          </div>
+          <div class="content content--mlarge">
+            <ul class="passion__list">
+              <li class="passion__item">
+                <div class="passion__image"><img src="assets/img/design-skills.svg" alt="Architecture"></div>
+                <h3 class="sub-title">Architecture</h3>
+                <p class="passion__text">I specialize in designing scalable, intelligent systems that bridge complex data relationships with seamless performance. By architecting solutions like Graph RAG systems with Neo4j and FastAPI, alongside autonomous extraction engines, I focus on structuring information for high precision and rapid retrieval. My approach is deeply rooted in understanding the foundational mathematics behind the models, ensuring every pipeline is robustly optimized from the ground up.</p>
+              </li>
+              <li class="passion__item">
+                <div class="passion__image"><img src="assets/img/tech.svg" alt="TECHNOLOGY"></div>
+                <h3 class="sub-title">TECHNOLOGY</h3>
+                <p class="passion__text">My technical toolkit merges advanced machine learning with practical, full-stack application development. I actively build and optimize computer vision and LLM pipelines, utilizing YOLO, BiRefNet, and Gemini 2.5 Flash, to tackle complex challenges like high-accuracy object retrieval and unstructured data parsing. I balance this AI expertise with versatile development skills, readily adapting environments from Streamlit to Flask to guarantee efficient, lightweight execution even on constrained hardware.</p>
+              </li>
+              <li class="passion__item">
+                <div class="passion__image"><img src="assets/img/book-open.svg" alt="STORY"></div>
+                <h3 class="sub-title">STORY</h3>
+                <p class="passion__text">My journey is fueled by a relentless drive to demystify complex algorithms, a passion that directly inspired me to develop the interactive Transformer Learning Hub. As I prepare to step into my role as an AI Software Engineering Intern at Digital Tribe, I am focused on pushing the practical limits of both local open-source models and advanced cloud infrastructure. Ultimately, I am driven by the challenge of translating intricate neural networks into intuitive, real-world solutions that genuinely empower users.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-set container">
+          <div class="text">
+            <p class="heading-num">03</p>
+            <div class="text__wrap content">
+              <h2 class="heading">SKILL SET</h2>
+            </div>
+          </div>
+          <div class="content content--mlarge skill-set__flex">
+            <ul class="skill-set__list">
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/python.svg" alt="Python"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Python</h4>
+                      <p class="skill-set__year">2YEARS</p>
+                    </div>
+                    <p class="small-title small-title--skill skill-set__high">90<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p90 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/oop.svg" alt="OOP"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">OOP</h4>
+                      <p class="skill-set__year">2YEARS</p>
+                    </div>
+                    <p class="small-title small-title--skill">80<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p80 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/dsa.svg" alt="DSA"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">DSA</h4>
+                      <p class="skill-set__year">1YEAR</p>
+                    </div>
+                    <p class="small-title small-title--skill">80<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p80 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/github.svg" alt="Github"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Github</h4>
+                      <p class="skill-set__year">2YEARS</p>
+                    </div>
+                    <p class="small-title small-title--skill">90<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p90 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/pandas.svg" alt="Pandas"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Pandas</h4>
+                      <p class="skill-set__year">1YEAR</p>
+                    </div>
+                    <p class="small-title small-title--skill">80<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p80 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/numpy.svg" alt="Numpy"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Numpy</h4>
+                      <p class="skill-set__year">1YEAR</p>
+                    </div>
+                    <p class="small-title small-title--skill">80<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p80 js-scroll"></div>
+                </div>
+              </li>
+            </ul>
+            <ul class="skill-set__list">
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/matplotlib.svg" alt="Matplotlib"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Matplotlib</h4>
+                      <p class="skill-set__year">1YEAR</p>
+                    </div>
+                    <p class="small-title small-title--skill">70<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p70 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/opencv.svg" alt="Computer Vision"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Computer Vision</h4>
+                      <p class="skill-set__year">1YEAR</p>
+                    </div>
+                    <p class="small-title small-title--skill">70<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p70 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/leetcode.svg" alt="Leetcode"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Leetcode</h4>
+                      <p class="skill-set__year">1YEAR</p>
+                    </div>
+                    <p class="small-title small-title--skill skill-set__high">90<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p90 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/pytorch.svg" alt="Machine Learning"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Machine Learning</h4>
+                      <p class="skill-set__year">1YEAR</p>
+                    </div>
+                    <p class="small-title small-title--skill">70<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p70 js-scroll"></div>
+                </div>
+              </li>
+              <li class="skill-set__item">
+                <div class="skill-set__icon"><img src="assets/img/skills/rag.svg" alt="Rag"></div>
+                <div class="skill-set__detail">
+                  <div class="skill-set__meta">
+                    <div class="skill-set__name">
+                      <h4 class="small-title small-title--skill">Rag</h4>
+                      <p class="skill-set__year">6MONTHS</p>
+                    </div>
+                    <p class="small-title small-title--skill">60<span class="skill-set__ratio">%</span></p>
+                  </div>
+                  <div class="skill-set__bar p60 js-scroll"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+        <a href="mailto:abrash.official100@gmail.com">abrash.official100@gmail.com</a>
+        <a href="https://github.com/Abrash-Official" target="_blank" rel="noopener">Abrash-Official</a>
+      </footer>
+    </div>
+  </script>
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.fullPage.js"></script>
+  <script src="assets/js/anime.min.js"></script>
+  <script src="assets/js/parallax.js"></script>
+  <script src="assets/js/barba.min.js"></script>
+  <script>window.ga = window.ga || function () { (window.ga.q = window.ga.q || []).push(arguments); };</script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/common.min.js"></script>
+</body>
 </html>
