@@ -138,6 +138,19 @@
     document.title = DETAIL_TITLES[key] || 'Abrash Arshad PORTFOLIO';
   }
 
+  function playLeaveUnderlayer() {
+    return new Promise(function (resolve) {
+      anime.timeline({
+        duration: 500,
+        easing: 'easeInOutCubic',
+        complete: resolve
+      })
+        .add({ targets: '.btn-wrap', translateY: [0, '110%'] })
+        .add({ targets: '.back-arrow svg', translateX: [0, '-100%'], offset: '-=500' })
+        .add({ targets: '.scrollDown', translateY: [0, '180%'], offset: '-=500' });
+    });
+  }
+
   function goToDetailFromDetail(key) {
     if (isNavigating) return;
     var html = getTemplateHTML(key);
@@ -145,11 +158,61 @@
 
     isNavigating = true;
     closeMenu();
-    replaceContainer(html);
-    setDetailTitle(key);
-    initUnderlayer();
-    onDetailPage = true;
-    isNavigating = false;
+
+    var atTop = $(window).scrollTop() === 0;
+    var leavePromise = atTop ? playLeaveUnderlayer() : Promise.resolve();
+
+    leavePromise
+      .then(function () {
+        return new Promise(function (resolve) {
+          anime({
+            targets: '.curtain',
+            translateY: ['100%', 0],
+            duration: 800,
+            easing: 'easeInOutCubic',
+            complete: resolve
+          });
+        });
+      })
+      .then(function () {
+        // Reset scroll only while curtain fully covers the viewport
+        $('body, html').scrollTop(0);
+        replaceContainer(html);
+        setDetailTitle(key);
+        onDetailPage = true;
+        if (window.matchMedia('(max-width: 420px)').matches) {
+          $('.page-top').height($(window).height());
+        }
+        if (typeof headerColor === 'function') headerColor();
+
+        // Keep entrance elements off-screen until the reveal timeline runs
+        anime({ targets: '.btn-wrap', translateY: '110%', duration: 0 });
+        anime({ targets: '.back-arrow svg', translateX: '100%', duration: 0 });
+        anime({ targets: '.scrollDown', translateY: '180%', duration: 0 });
+
+        anime({
+          targets: '.curtain',
+          translateY: [0, '-100%'],
+          duration: 800,
+          easing: 'easeInOutCubic',
+          complete: function () {
+            isNavigating = false;
+          }
+        });
+
+        anime.timeline({ duration: 500, easing: 'easeInOutCubic' })
+          .add({ targets: '.btn-wrap', translateY: ['110%', 0] })
+          .add({ targets: '.back-arrow svg', translateX: ['100%', 0], offset: '-=500' })
+          .add({ targets: '.scrollDown', translateY: ['180%', 0], offset: '-=500' });
+
+        $(window).off('scroll.underlayer').on('scroll.underlayer', function () {
+          $('.js-scroll').each(function () {
+            if ($(window).scrollTop() + $(window).height() > $(this).offset().top) {
+              $(this).addClass('in');
+            }
+          });
+        });
+      });
   }
 
   function getBackAnchor(href) {
