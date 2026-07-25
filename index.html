@@ -14,13 +14,44 @@
   <title>Abrash Arshad PORTFOLIO</title>
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="apple-touch-icon" href="assets/img/favicon.png">
+  <style>
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #020b16;
+      color: #fff;
+    }
+  </style>
   <link rel="stylesheet" href="assets/css/jquery.fullPage.css">
   <link rel="stylesheet" href="assets/css/common.css">
+  <link rel="stylesheet" href="assets/css/loader.css">
   <link rel="stylesheet" href="assets/css/all.css">
   <link rel="stylesheet" href="assets/css/google-fonts.css">
   <link rel="stylesheet" href="assets/css/awwwards.css">
 </head>
 <body>
+  <div class="loader" aria-busy="true" aria-live="polite">
+    <div class="loader__inner">
+      <div class="loader__moon" aria-hidden="true">
+        <span class="loader__glow"></span>
+        <span class="loader__orb">
+          <span class="loader__crater loader__crater--1"></span>
+          <span class="loader__crater loader__crater--2"></span>
+          <span class="loader__crater loader__crater--3"></span>
+        </span>
+        <span class="loader__cloud loader__cloud--a"></span>
+        <span class="loader__cloud loader__cloud--b"></span>
+        <span class="loader__cloud loader__cloud--c"></span>
+      </div>
+      <p class="loader__brand">ABRASH ARSHAD</p>
+      <p class="loader__label">PORTFOLIO</p>
+      <div class="loader__bar" aria-hidden="true"><span></span></div>
+    </div>
+  </div>
   <header>
     <a class="name" href="#top">Abrash Arshad</a>
     <div class="wrap">
@@ -44,7 +75,6 @@
       </ul>
     </nav>
     <div class="curtain"></div>
-    <div class="loader"></div>
   </header>
 
   <main id="barba-wrapper" aria-live="polite">

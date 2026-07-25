@@ -1,0 +1,257 @@
+/* Themed page loader — moon / night sky matching the hero */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 42%, rgba(7, 33, 66, 0.85) 0%, transparent 70%),
+    #020b16;
+  color: #fff;
+  overflow: hidden;
+  pointer-events: all;
+}
+
+.loader.js-hidden {
+  display: none;
+}
+
+.loader__inner {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.loader__moon {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 36px;
+}
+
+.loader__glow {
+  position: absolute;
+  inset: -28%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 250, 0.18) 0%, transparent 68%);
+  -webkit-animation: loader-glow 2.8s ease-in-out infinite;
+  animation: loader-glow 2.8s ease-in-out infinite;
+}
+
+.loader__orb {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #fffffa;
+  -webkit-box-shadow: 0 0 40px rgba(255, 255, 250, 0.12);
+  box-shadow: 0 0 40px rgba(255, 255, 250, 0.12);
+  -webkit-animation: loader-float 3.2s ease-in-out infinite;
+  animation: loader-float 3.2s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.loader__crater {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(2, 11, 22, 0.12);
+}
+
+.loader__crater--1 {
+  width: 22%;
+  height: 22%;
+  top: 22%;
+  left: 18%;
+}
+
+.loader__crater--2 {
+  width: 12%;
+  height: 12%;
+  top: 18%;
+  left: 48%;
+}
+
+.loader__crater--3 {
+  width: 8%;
+  height: 8%;
+  top: 38%;
+  left: 52%;
+}
+
+.loader__cloud {
+  position: absolute;
+  height: 10px;
+  border-radius: 999px;
+  background: #020b16;
+  z-index: 2;
+}
+
+.loader__cloud--a {
+  width: 78%;
+  top: 34%;
+  left: 38%;
+  -webkit-animation: loader-drift 2.4s ease-in-out infinite;
+  animation: loader-drift 2.4s ease-in-out infinite;
+}
+
+.loader__cloud--b {
+  width: 64%;
+  height: 9px;
+  top: 48%;
+  left: 42%;
+  -webkit-animation: loader-drift 2.4s ease-in-out infinite 0.2s;
+  animation: loader-drift 2.4s ease-in-out infinite 0.2s;
+}
+
+.loader__cloud--c {
+  width: 52%;
+  height: 8px;
+  top: 62%;
+  right: 36%;
+  left: auto;
+  -webkit-animation: loader-drift-alt 2.8s ease-in-out infinite 0.1s;
+  animation: loader-drift-alt 2.8s ease-in-out infinite 0.1s;
+}
+
+.loader__brand {
+  font-family: "futura_m", "futura_r", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.loader__label {
+  font-family: "futura_r", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 2.4rem;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  margin: 0 0 28px;
+  color: #fffffa;
+  -webkit-animation: loader-fade 2.2s ease-in-out infinite;
+  animation: loader-fade 2.2s ease-in-out infinite;
+}
+
+.loader__bar {
+  width: 120px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.loader__bar span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: #fffffa;
+  border-radius: 2px;
+  -webkit-animation: loader-bar 1.4s ease-in-out infinite;
+  animation: loader-bar 1.4s ease-in-out infinite;
+}
+
+@-webkit-keyframes loader-float {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-8px); transform: translateY(-8px); }
+}
+
+@keyframes loader-float {
+  0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); }
+  50% { -webkit-transform: translateY(-8px); transform: translateY(-8px); }
+}
+
+@-webkit-keyframes loader-glow {
+  0%, 100% { opacity: 0.55; -webkit-transform: scale(1); transform: scale(1); }
+  50% { opacity: 1; -webkit-transform: scale(1.06); transform: scale(1.06); }
+}
+
+@keyframes loader-glow {
+  0%, 100% { opacity: 0.55; -webkit-transform: scale(1); transform: scale(1); }
+  50% { opacity: 1; -webkit-transform: scale(1.06); transform: scale(1.06); }
+}
+
+@-webkit-keyframes loader-drift {
+  0%, 100% { -webkit-transform: translateX(0); transform: translateX(0); }
+  50% { -webkit-transform: translateX(-18px); transform: translateX(-18px); }
+}
+
+@keyframes loader-drift {
+  0%, 100% { -webkit-transform: translateX(0); transform: translateX(0); }
+  50% { -webkit-transform: translateX(-18px); transform: translateX(-18px); }
+}
+
+@-webkit-keyframes loader-drift-alt {
+  0%, 100% { -webkit-transform: translateX(0); transform: translateX(0); }
+  50% { -webkit-transform: translateX(14px); transform: translateX(14px); }
+}
+
+@keyframes loader-drift-alt {
+  0%, 100% { -webkit-transform: translateX(0); transform: translateX(0); }
+  50% { -webkit-transform: translateX(14px); transform: translateX(14px); }
+}
+
+@-webkit-keyframes loader-fade {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes loader-fade {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@-webkit-keyframes loader-bar {
+  0% { -webkit-transform: translateX(-120%); transform: translateX(-120%); }
+  100% { -webkit-transform: translateX(320%); transform: translateX(320%); }
+}
+
+@keyframes loader-bar {
+  0% { -webkit-transform: translateX(-120%); transform: translateX(-120%); }
+  100% { -webkit-transform: translateX(320%); transform: translateX(320%); }
+}
+
+@media screen and (max-width: 420px) {
+  .loader__moon {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 28px;
+  }
+
+  .loader__brand {
+    font-size: 0.95rem;
+    letter-spacing: 0.32em;
+    text-indent: 0.32em;
+  }
+
+  .loader__label {
+    font-size: 1.8rem;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+    margin-bottom: 24px;
+  }
+
+  .loader__bar {
+    width: 96px;
+  }
+}
