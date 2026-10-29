@@ -27,11 +27,6 @@ header.js-color .social-icon {
 }
 
 /* Projects hub & detail pages */
-.page-top .image__projects {
-	background: url(../img/01.png) no-repeat center;
-	background-size: cover;
-}
-
 .page-top .image__rag {
 	background: url(../img/Ragchat_Project.webp) no-repeat center;
 	background-size: cover;

@@ -24,34 +24,31 @@
   <title>Abrash Arshad PORTFOLIO</title>
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="apple-touch-icon" href="assets/img/favicon.png">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preload" href="assets/font/Futura-Boo.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="assets/font/Futura-Med.woff" as="font" type="font/woff" crossorigin>
-  <link rel="preload" href="assets/font/Futura-Bol.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/img/moonlight.svg" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/img/star.svg" as="image" fetchpriority="high">
   <link rel="preload" href="assets/img/moon.svg" as="image">
-  <link rel="preload" href="assets/img/moonlight.svg" as="image">
-  <link rel="preload" href="assets/img/star.svg" as="image">
   <style>
-    .loader {
-      position: fixed;
-      inset: 0;
-      z-index: 100000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #020b16;
-      color: #fff;
-    }
+    .loader{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;background:#020b16;color:#fff}
+    html.is-booting .js-moon{-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0);opacity:0}
+    html.is-booting .title--top .js-letter{-webkit-transform:translate3d(-105%,0,0);transform:translate3d(-105%,0,0)}
+    .moonlight__img{background:none!important}
+    .moonlight__img img{width:100%;height:100%;display:block;pointer-events:none}
+    .image--works,.image--about,.image--contact{background-color:#061220}
   </style>
   <link rel="stylesheet" href="assets/css/jquery.fullPage.css">
   <link rel="stylesheet" href="assets/css/common.css">
-  <link rel="stylesheet" href="assets/css/loader.css">
-  <link rel="stylesheet" href="assets/css/perf.css">
+  <link rel="stylesheet" href="assets/css/loader.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="assets/css/perf.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="assets/css/section-media.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="assets/css/all.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="assets/css/google-fonts.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="assets/css/awwwards.css" media="print" onload="this.media='all'">
   <noscript>
+    <link rel="stylesheet" href="assets/css/loader.css">
+    <link rel="stylesheet" href="assets/css/perf.css">
+    <link rel="stylesheet" href="assets/css/section-media.css">
     <link rel="stylesheet" href="assets/css/all.css">
     <link rel="stylesheet" href="assets/css/google-fonts.css">
     <link rel="stylesheet" href="assets/css/awwwards.css">
@@ -144,7 +141,7 @@
                     <div class="cloud cloud--front2 js-moon"><img src="assets/img/cloud2.svg" width="475" height="229" alt="cloud"></div>
                   </div>
                   <div class="moon__back layer" data-depth="0.5">
-                    <img class="js-moon" src="assets/img/moon.svg" width="545" height="545" alt="moon" fetchpriority="high" decoding="async">
+                    <img class="js-moon" src="assets/img/moon.svg" width="545" height="545" alt="moon" decoding="async">
                   </div>
                   <div class="moon__front layer" data-depth="0.7">
                     <div class="cloud cloud--front3 js-moon"><img src="assets/img/cloud3.svg" width="475" height="229" alt="cloud"></div>
@@ -232,7 +229,9 @@
       <div class="moon-background">
         <div class="moonlight">
           <div class="moonlight__wrap js-parallax-moonlight">
-            <div class="layer moonlight__img" data-depth="0.2"></div>
+            <div class="layer moonlight__img" data-depth="0.2">
+              <img src="assets/img/moonlight.svg" width="1385" height="1385" alt="" decoding="async" fetchpriority="high">
+            </div>
           </div>
         </div>
       </div>
