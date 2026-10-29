@@ -1,0 +1,50 @@
+﻿/* Performance / CLS helpers — no visual redesign */
+
+.loader__inner {
+  width: min(100%, 320px);
+  min-height: 260px;
+  box-sizing: border-box;
+}
+
+/* First-paint entrance state; removed after hero intro */
+html.is-booting .js-moon {
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  opacity: 0;
+}
+
+html.is-booting .title--top .js-letter {
+  -webkit-transform: translate3d(-105%, 0, 0);
+  transform: translate3d(-105%, 0, 0);
+}
+
+.moon,
+.moonlight,
+.star {
+  contain: layout style;
+}
+
+.moon img,
+.star__img img,
+.cloud img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.skill-set__icon img,
+.passion__image img,
+.who__image img,
+.project-entry__image img,
+.meta .content img,
+.kamp img {
+  max-width: 100%;
+  height: auto;
+}

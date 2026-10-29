@@ -412,6 +412,18 @@
 
   initPages();
 
+  // Refresh cached home markup after hero entrance finishes (avoids stale transforms)
+  $(window).on('load', function () {
+    setTimeout(function () {
+      var homeContainer = document.querySelector('#barba-wrapper .barba-container[data-namespace="top"]');
+      if (homeContainer) {
+        homeHTML = homeContainer.outerHTML;
+        pages.home = wrapPage(homeHTML);
+      }
+      document.documentElement.classList.remove('is-booting');
+    }, 2200);
+  });
+
   var originalXhr = Barba.Utils.xhr.bind(Barba.Utils);
   Barba.Utils.xhr = function (url) {
     var key = resolvePageKey(url);
