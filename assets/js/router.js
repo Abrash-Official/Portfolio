@@ -219,6 +219,21 @@
     return getHashAnchor(href);
   }
 
+  function labelFpNav() {
+    var labels = {
+      top: 'Home',
+      projects: 'Projects',
+      about: 'About Me',
+      contact: 'Contact'
+    };
+    $('#fp-nav a').each(function () {
+      var key = (($(this).attr('href') || '').replace(/^#/, '') || '').toLowerCase();
+      if (labels[key]) {
+        $(this).attr('aria-label', labels[key]);
+      }
+    });
+  }
+
   function initFullpage(anchor) {
     $('html, body').css({ overflow: '', height: '' }).removeClass(
       'fp-enabled fp-viewing-top fp-viewing-projects fp-viewing-reile fp-viewing-about fp-viewing-contact'
@@ -226,6 +241,7 @@
     if (typeof fullPage === 'function') {
       fullPage();
     }
+    labelFpNav();
     if (anchor && $.fn.fullpage) {
       setTimeout(function () {
         $.fn.fullpage.moveTo(anchor);
@@ -447,6 +463,9 @@
         };
       }
       document.addEventListener('click', handleLinkClick, true);
+      labelFpNav();
     }, 0);
+    // fullPage builds #fp-nav asynchronously on ready — label once it exists
+    $(window).on('load', labelFpNav);
   });
 })(jQuery);
